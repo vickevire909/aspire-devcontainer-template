@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HelloAspire.ApiService\HelloAspire.ApiService.csproj" />
-    <ProjectReference Include="..\HelloAspire.Web\HelloAspire.Web.csproj" />
   </ItemGroup>
 
   <ItemGroup>
