@@ -5,12 +5,31 @@ This is a repository template to streamline the process of getting started with 
 - [Aspire and GitHub Codespaces](https://learn.microsoft.com/dotnet/aspire/get-started/github-codespaces)
 - [Aspire and Visual Studio Code Dev Containers](https://learn.microsoft.com/dotnet/aspire/get-started/dev-containers)
 
-> [!NOTE]
-> Once you have created your repository from this template please remember to review the included files such as `LICENSE`, `CODE_OF_CONDUCT.md`, `SECURITY.md` and this `README.md` file to ensure they are appropriate for your circumstances.
+## Folder Structure
 
-# Code of Conduct
+```
+/src
+  /Hosts                              ← thin, executable, one per deployable
+    /Api                              (Microsoft.NET.Sdk.Web)
+    /Functions.Http                   (isolated worker)
+    /Functions.Timers
+    /Functions.ServiceBus
 
-This project has adopted the code of conduct defined by the Contributor Covenant
-to clarify expected behavior in our community.
+  /Modules
+    /Orders
+      Orders.csproj                   ← application code: Features/Domain/Data
+      Orders.Contracts.csproj         ← tiny, dependency-free, public integration events
+      Orders.Tests.csproj
+    /Inventory
+      Inventory.csproj
+      Inventory.Contracts.csproj
+      Inventory.Tests.csproj
+    /Notifications
+      (same shape)
 
-For more information, see the [.NET Foundation Code of Conduct](https://dotnetfoundation.org/code-of-conduct).
+  /Shared.Kernel                      ← Messaging/Persistence/Caching/Storage/Security helpers
+  /ServiceDefaults
+
+/tests
+  /ArchitectureTests
+```

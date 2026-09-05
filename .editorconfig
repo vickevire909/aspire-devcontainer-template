@@ -1,0 +1,22 @@
+[*]
+
+# Non-configurable behaviors
+charset = utf-8
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Configurable behaviors
+indent_style = space
+indent_size = 4
+max_line_length = 100
+end_of_line = LF
+
+[*.{cs,csx}]
+# Non-configurable behaviors
+dotnet_sort_system_directives_first = true
+dotnet_separate_import_directive_groups = false
+
+[*.{config,csproj,props,slnx,targets,xaml,xml}]
+indent_style = space
+indent_size = 2
+max_line_length = 100
