@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
@@ -23,5 +22,4 @@
     <ProjectReference Include="..\Example\Example.csproj" />
     <ProjectReference Include="..\Example.Contracts\Example.Contracts.csproj" />
   </ItemGroup>
-
 </Project>

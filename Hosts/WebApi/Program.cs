@@ -1,5 +1,7 @@
-using Hosts.WebApi;
-using Microsoft.AspNetCore.Mvc;
+using Example.Features.CreateWeatherForecast;
+using Example.Features.GetWeatherForecast;
+using Example.Features.GetWeatherForecastById;
+using Wolverine;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +10,9 @@ builder.AddServiceDefaults();
 
 // Add services to the container.
 builder.Services.AddProblemDetails();
+builder.Host.UseWolverine(options =>
+    options.Discovery.IncludeAssembly(typeof(GetWeatherForecastHandler).Assembly)
+);
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
@@ -22,61 +27,12 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-string[] summaries =
-[
-    "Freezing",
-    "Bracing",
-    "Chilly",
-    "Cool",
-    "Mild",
-    "Warm",
-    "Balmy",
-    "Hot",
-    "Sweltering",
-    "Scorching",
-];
-
 app.MapGet("/", () => "API service is running. Navigate to /weatherforecast to see sample data.");
 
-app.MapGet(
-        "/weatherforecast",
-        () =>
-        {
-            var forecast = Enumerable
-                .Range(1, 5)
-                .Select(index => new WeatherForecast(
-                    DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                    Random.Shared.Next(-20, 55),
-                    summaries[Random.Shared.Next(summaries.Length)]
-                ))
-                .ToArray();
-            return forecast;
-        }
-    )
-    .WithName("GetWeatherForecast");
-
-app.MapGet(
-        "/weatherforecast/{id}",
-        (Guid id) =>
-        {
-            var forecast = new WeatherForecast(
-                DateOnly.FromDateTime(DateTime.Now),
-                Random.Shared.Next(-20, 55),
-                summaries[Random.Shared.Next(summaries.Length)]
-            );
-            return forecast;
-        }
-    )
-    .WithName("GetWeatherForecastById");
-
-app.MapPost(
-        "/weatherforecast",
-        ([FromBody] CreateWeatherForecast request) =>
-        {
-            var forecast = new WeatherForecast(request.Date, request.TemperatureC, request.Summary);
-        }
-    )
-    .WithName("CreateWeatherForecast");
+var api = app.MapGroup("/api");
+api.MapGetWeatherForecastEndpoint();
+api.MapGetWeatherForecastByIdEndpoint();
+api.MapCreateWeatherForecastEndpoint();
 
 app.MapDefaultEndpoints();
 
