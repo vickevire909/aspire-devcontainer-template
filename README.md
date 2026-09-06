@@ -10,7 +10,7 @@ This is a repository template to streamline the process of getting started with 
 ```
 /src
   /Hosts                              ← thin, executable, one per deployable
-    /Api                              (Microsoft.NET.Sdk.Web)
+    /WebApi                              (Microsoft.NET.Sdk.Web)
     /Functions.Http                   (isolated worker)
     /Functions.Timers
     /Functions.ServiceBus

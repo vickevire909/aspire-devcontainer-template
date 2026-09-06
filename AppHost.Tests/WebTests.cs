@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Logging;
 
-namespace HelloAspire.Tests;
+namespace AppHost.Tests;
 
 public class WebTests
 {
@@ -12,10 +12,9 @@ public class WebTests
         // Arrange
         var cancellationToken = TestContext.Current.CancellationToken;
 
-        var appHost =
-            await DistributedApplicationTestingBuilder.CreateAsync<Projects.HelloAspire_AppHost>(
-                cancellationToken
-            );
+        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.AppHost>(
+            cancellationToken
+        );
         appHost.Services.AddLogging(logging =>
         {
             logging.SetMinimumLevel(LogLevel.Debug);

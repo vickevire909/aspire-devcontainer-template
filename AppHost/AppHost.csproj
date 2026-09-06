@@ -5,10 +5,11 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <UserSecretsId>3422fdf1-3515-48dd-9995-dca19ebc9995</UserSecretsId>
+    <AspireUseCliBundle>true</AspireUseCliBundle>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HelloAspire.ApiService\HelloAspire.ApiService.csproj" />
+    <ProjectReference Include="../Hosts/WebApi/WebApi.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,10 +1,8 @@
-using HelloAspire.Shared;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.ServiceDiscovery;
 using OpenTelemetry;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Trace;
@@ -37,10 +35,7 @@ public static class Extensions
             http.AddServiceDiscovery();
         });
 
-        builder.Services.ConfigureHttpJsonOptions(opts =>
-        {
-            opts.SerializerOptions.Converters.Add(new EntityIdJsonConverterFactory());
-        });
+        builder.Services.ConfigureHttpJsonOptions(opts => { });
 
         // Uncomment the following to restrict the allowed schemes for service discovery.
         // builder.Services.Configure<ServiceDiscoveryOptions>(options =>

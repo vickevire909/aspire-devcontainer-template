@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HelloAspire.AppHost\HelloAspire.AppHost.csproj" />
+    <ProjectReference Include="../AppHost/AppHost.csproj" />
   </ItemGroup>
 
   <ItemGroup>

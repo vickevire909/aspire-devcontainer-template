@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../HelloAspire.Shared/HelloAspire.Shared.csproj" />
-    <ProjectReference Include="..\HelloAspire.ServiceDefaults\HelloAspire.ServiceDefaults.csproj" />
+    <ProjectReference Include="../../Shared.Kernel/Shared.Kernel.csproj" />
+    <ProjectReference Include="../../ServiceDefaults/ServiceDefaults.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,4 +1,4 @@
-using HelloAspire.ApiService;
+using Hosts.WebApi;
 using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -60,7 +60,6 @@ app.MapGet(
         (Guid id) =>
         {
             var forecast = new WeatherForecast(
-                WeatherForecastId.FromValue(id),
                 DateOnly.FromDateTime(DateTime.Now),
                 Random.Shared.Next(-20, 55),
                 summaries[Random.Shared.Next(summaries.Length)]
