@@ -7,7 +7,7 @@ public class WebTests
     private static readonly TimeSpan DefaultTimeout = TimeSpan.FromSeconds(30);
 
     [Fact]
-    public async Task GetWebResourceRootReturnsOkStatusCode()
+    public async Task GetWebApiRootReturnsOkStatusCode()
     {
         // Arrange
         var cancellationToken = TestContext.Current.CancellationToken;
@@ -34,9 +34,9 @@ public class WebTests
         await app.StartAsync(cancellationToken).WaitAsync(DefaultTimeout, cancellationToken);
 
         // Act
-        var httpClient = app.CreateHttpClient("webfrontend");
+        var httpClient = app.CreateHttpClient("web-api");
         await app
-            .ResourceNotifications.WaitForResourceHealthyAsync("webfrontend", cancellationToken)
+            .ResourceNotifications.WaitForResourceHealthyAsync("web-api", cancellationToken)
             .WaitAsync(DefaultTimeout, cancellationToken);
         var response = await httpClient.GetAsync("/", cancellationToken);
 

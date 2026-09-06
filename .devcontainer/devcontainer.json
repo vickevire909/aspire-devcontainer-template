@@ -33,7 +33,8 @@
     // }
     "postCreateCommand": {
         "dotnetRestore": "dotnet restore",
-        "dotnetToolRestore": "dotnet tool restore"
+        "dotnetToolRestore": "dotnet tool restore",
+        "dotnetInstallXUnitTemplates": "dotnet new install xunit.v3.templates"
     },
     "postStartCommand": {
         "devcerts": "dotnet dev-certs https --trust || true"
