@@ -45,7 +45,8 @@
                 "ms-dotnettools.csdevkit",
                 "microsoft-aspire.aspire-vscode",
                 "csharpier.csharpier-vscode",
-                "esbenp.prettier-vscode"
+                "esbenp.prettier-vscode",
+                "humao.rest-client"
             ]
         }
     }
