@@ -1,5 +1,5 @@
 using Modules.Example.Core.Features.GetWeatherForecast;
-using Shared.Kernel.Routing;
+using Modules.Example.Http;
 using Wolverine;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -32,7 +32,8 @@ app.MapGet(
 );
 
 var api = app.MapGroup("/api");
-api.MapEndpoints();
+
+api.MapExampleEndpoints();
 
 app.MapDefaultEndpoints();
 

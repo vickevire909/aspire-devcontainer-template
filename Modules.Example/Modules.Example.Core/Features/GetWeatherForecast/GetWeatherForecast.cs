@@ -1,33 +1,9 @@
 using System.Collections.Concurrent;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Routing;
 using Modules.Example.Core.Domain;
-using Shared.Kernel.Routing;
-using Wolverine;
 
 namespace Modules.Example.Core.Features.GetWeatherForecast;
 
 public sealed record GetWeatherForecast;
-
-public sealed class GetWeatherForecastEndpoint : IEndpoint
-{
-    public IEndpointRouteBuilder Map(IEndpointRouteBuilder endpoints)
-    {
-        endpoints
-            .MapGroup("/v1")
-            .MapGet(
-                "/weatherforecast",
-                async (IMessageBus bus, CancellationToken cancellationToken) =>
-                    await bus.InvokeAsync<WeatherForecast[]>(
-                        new GetWeatherForecast(),
-                        cancellationToken
-                    )
-            )
-            .WithName("GetWeatherForecast");
-
-        return endpoints;
-    }
-}
 
 public static class GetWeatherForecastHandler
 {
