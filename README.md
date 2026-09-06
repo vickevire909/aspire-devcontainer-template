@@ -30,7 +30,7 @@ From the repository root, run:
 ./.scripts/create_module.sh Orders
 ```
 
-This creates `Modules.Orders.Core`, `Modules.Orders.Contracts`, and `Modules.Orders.Tests`, adds them to the solution, and restores the repository.
+This creates `Modules.Orders.Core`, `Modules.Orders.Contracts`, `Modules.Orders.Http`, and `Modules.Orders.Tests`, adds them to the solution, and restores the repository. Remove the HTTP project manually if the module does not need it.
 
 ### Project References
 
