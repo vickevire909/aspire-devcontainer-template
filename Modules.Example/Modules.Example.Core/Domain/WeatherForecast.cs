@@ -1,4 +1,4 @@
-namespace Example.Domain;
+namespace Modules.Example.Core.Domain;
 
 public sealed record WeatherForecast(Guid Id, DateOnly Date, int TemperatureC, string? Summary)
 {

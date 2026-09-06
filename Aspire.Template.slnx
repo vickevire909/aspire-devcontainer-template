@@ -2,10 +2,10 @@
   <Folder Name="/Hosts/">
     <Project Path="Hosts\WebApi\WebApi.csproj" />
   </Folder>
-  <Folder Name="/Modules/">
-    <Project Path="Modules/Example.Contracts/Example.Contracts.csproj" />
-    <Project Path="Modules/Example.Tests/Example.Tests.csproj" />
-    <Project Path="Modules/Example/Example.csproj" />
+  <Folder Name="/Modules.Example/">
+    <Project Path="Modules.Example/Modules.Example.Contracts/Modules.Example.Contracts.csproj" />
+    <Project Path="Modules.Example/Modules.Example.Core/Modules.Example.Core.csproj" />
+    <Project Path="Modules.Example/Modules.Example.Tests/Modules.Example.Tests.csproj" />
   </Folder>
   <Project Path="AppHost.Tests\AppHost.Tests.csproj" />
   <Project Path="AppHost\AppHost.csproj" />

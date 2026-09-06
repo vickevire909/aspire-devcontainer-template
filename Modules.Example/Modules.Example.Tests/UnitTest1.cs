@@ -1,4 +1,4 @@
-namespace Example.Tests;
+namespace Modules.Example.Core.Tests;
 
 public class UnitTest1
 {

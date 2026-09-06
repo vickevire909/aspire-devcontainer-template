@@ -1,11 +1,11 @@
 using System.Collections.Concurrent;
-using Example.Domain;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
+using Modules.Example.Core.Domain;
 using Shared.Kernel.Routing;
 using Wolverine;
 
-namespace Example.Features.GetWeatherForecast;
+namespace Modules.Example.Core.Features.GetWeatherForecast;
 
 public sealed record GetWeatherForecast;
 

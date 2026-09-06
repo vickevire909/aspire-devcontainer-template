@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Example\Example.csproj" />
-    <ProjectReference Include="..\Example.Contracts\Example.Contracts.csproj" />
+    <ProjectReference Include="..\Modules.Example.Core\Modules.Example.Core.csproj" />
+    <ProjectReference Include="..\Modules.Example.Contracts\Modules.Example.Contracts.csproj" />
   </ItemGroup>
 </Project>

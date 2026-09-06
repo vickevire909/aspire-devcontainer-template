@@ -1,12 +1,12 @@
-using Example.Domain;
-using Example.Features.GetWeatherForecast;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
+using Modules.Example.Core.Domain;
+using Modules.Example.Core.Features.GetWeatherForecast;
 using Shared.Kernel.Routing;
 using Wolverine;
 
-namespace Example.Features.CreateWeatherForecast;
+namespace Modules.Example.Core.Features.CreateWeatherForecast;
 
 public sealed record CreateWeatherForecast(DateOnly Date, int TemperatureC, string? Summary);
 

@@ -13,10 +13,9 @@ This is a repository template to streamline the process of getting started with 
 |-- AppHost.Tests/                     AppHost integration tests
 |-- Hosts/                             Deployable applications
 |   `-- WebApi/                         Example ASP.NET Core host
-|-- Modules/                           Business modules
-|   |-- Example/                        Module implementation
-|   |-- Example.Contracts/              Public contracts for the module
-|   `-- Example.Tests/                  Module tests
+|-- Modules.Example.Core/              Module implementation
+|-- Modules.Example.Contracts/         Public contracts for the module
+|-- Modules.Example.Tests/             Module tests
 |-- ServiceDefaults/                   Shared Aspire service configuration
 |-- Shared.Kernel/                     Cross-cutting application helpers and infra plumbing
 |-- Aspire.Template.slnx               Solution
@@ -31,7 +30,7 @@ From the repository root, run:
 ./.scripts/create_module.sh Orders
 ```
 
-This creates `Modules/Orders`, `Modules/Orders.Contracts`, and `Modules/Orders.Tests`, adds them to the solution, and restores the repository.
+This creates `Modules.Orders.Core`, `Modules.Orders.Contracts`, and `Modules.Orders.Tests`, adds them to the solution, and restores the repository.
 
 ### Project References
 

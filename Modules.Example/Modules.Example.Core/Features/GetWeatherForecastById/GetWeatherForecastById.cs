@@ -1,12 +1,12 @@
-using Example.Domain;
-using Example.Features.GetWeatherForecast;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
+using Modules.Example.Core.Domain;
+using Modules.Example.Core.Features.GetWeatherForecast;
 using Shared.Kernel.Routing;
 using Wolverine;
 
-namespace Example.Features.GetWeatherForecastById;
+namespace Modules.Example.Core.Features.GetWeatherForecastById;
 
 public sealed record GetWeatherForecastById(Guid Id);
 

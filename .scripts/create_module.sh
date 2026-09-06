@@ -9,41 +9,45 @@ fi
 
 # find the correct module root independent of caller location.
 WORKSPACE_ROOT="${containerWorkspaceFolder:-$PWD}"
-MODULE_ROOT="$WORKSPACE_ROOT/Modules"
 
 cd "$WORKSPACE_ROOT"
 
 MODULE_NAME="$1"
+MODULE_PREFIX="Modules.$MODULE_NAME"
 
-MODULE_PATH="$MODULE_ROOT/$MODULE_NAME"
-CONTRACTS_PATH="$MODULE_ROOT/$MODULE_NAME.Contracts"
-TESTS_PATH="$MODULE_ROOT/$MODULE_NAME.Tests"
+MODULE_PATH="$WORKSPACE_ROOT/$MODULE_PREFIX"
+
+CORE="$MODULE_PREFIX.Core"
+CONTRACTS="$MODULE_PREFIX.Contracts"
+TESTS="$MODULE_PREFIX.Tests"
+
+CORE_PATH="$MODULE_PATH/$CORE"
+CONTRACTS_PATH="$MODULE_PATH/$CONTRACTS"
+TESTS_PATH="$MODULE_PATH/$TESTS"
 
 SHARED_KERNEL_PROJECT_PATH="$WORKSPACE_ROOT/Shared.Kernel/Shared.Kernel.csproj"
 
-if [[ -e "$MODULE_PATH" || -e "$CONTRACTS_PATH" || -e "$TESTS_PATH" ]]; then
-	echo "Error: module '$MODULE_NAME' already exists in $MODULE_ROOT" >&2
+if [[ -e "$CORE_PATH" || -e "$CONTRACTS_PATH" || -e "$TESTS_PATH" ]]; then
+	echo "Error: module '$MODULE_PREFIX' already exists in $WORKSPACE_ROOT" >&2
 	exit 1
 fi
 
-echo "creating new module in $MODULE_ROOT"
-
-mkdir -p "$MODULE_ROOT"
+echo "creating new module in $WORKSPACE_ROOT"
 
 dotnet new classlib \
-	--name "$MODULE_NAME" \
-	--output "$MODULE_PATH" \
+	--name "$CORE" \
+	--output "$CORE_PATH" \
     --framework net10.0 \
     --no-restore
 
 dotnet new classlib \
-	--name "$MODULE_NAME.Contracts" \
+	--name "$CONTRACTS" \
 	--output "$CONTRACTS_PATH" \
     --framework net10.0 \
     --no-restore
 
 dotnet new xunit3 \
-	--name "$MODULE_NAME.Tests" \
+	--name "$TESTS" \
 	--output "$TESTS_PATH" \
 	--framework net10.0 \
 	--test-runner mtp-v2 \
@@ -51,21 +55,21 @@ dotnet new xunit3 \
 
 # remove package version information. version is defined centrally.
 sed -i 's/ Version="[^"]*"//' \
-	"$TESTS_PATH/$MODULE_NAME.Tests.csproj"
+	"$TESTS_PATH/$TESTS.csproj"
 
 # add project references within module
-dotnet add "$MODULE_PATH/$MODULE_NAME.csproj" reference \
-	"$CONTRACTS_PATH/$MODULE_NAME.Contracts.csproj" \
+dotnet add "$CORE_PATH/$CORE.csproj" reference \
+	"$CONTRACTS_PATH/$CONTRACTS.csproj" \
 	"$SHARED_KERNEL_PROJECT_PATH"
 
-dotnet add "$TESTS_PATH/$MODULE_NAME.Tests.csproj" reference \
-	"$MODULE_PATH/$MODULE_NAME.csproj" \
-	"$CONTRACTS_PATH/$MODULE_NAME.Contracts.csproj"
+dotnet add "$TESTS_PATH/$TESTS.csproj" reference \
+	"$CORE_PATH/$CORE.csproj" \
+	"$CONTRACTS_PATH/$CONTRACTS.csproj"
 
 # add projects to solution
 dotnet sln add \
-	"$MODULE_PATH/$MODULE_NAME.csproj" \
-	"$CONTRACTS_PATH/$MODULE_NAME.Contracts.csproj" \
-	"$TESTS_PATH/$MODULE_NAME.Tests.csproj"
+	"$CORE_PATH/$CORE.csproj" \
+	"$CONTRACTS_PATH/$CONTRACTS.csproj" \
+	"$TESTS_PATH/$TESTS.csproj"
 
 dotnet restore

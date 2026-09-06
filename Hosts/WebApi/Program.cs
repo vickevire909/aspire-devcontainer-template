@@ -1,4 +1,4 @@
-using Example.Features.GetWeatherForecast;
+using Modules.Example.Core.Features.GetWeatherForecast;
 using Shared.Kernel.Routing;
 using Wolverine;
 
