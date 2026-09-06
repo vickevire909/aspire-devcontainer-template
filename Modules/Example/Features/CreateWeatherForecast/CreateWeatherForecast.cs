@@ -1,18 +1,18 @@
+using Example.Domain;
 using Example.Features.GetWeatherForecast;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
+using Shared.Kernel.Routing;
 using Wolverine;
 
 namespace Example.Features.CreateWeatherForecast;
 
 public sealed record CreateWeatherForecast(DateOnly Date, int TemperatureC, string? Summary);
 
-public static class CreateWeatherForecastEndpoint
+public sealed class CreateWeatherForecastEndpoint : IEndpoint
 {
-    public static IEndpointRouteBuilder MapCreateWeatherForecastEndpoint(
-        this IEndpointRouteBuilder endpoints
-    )
+    public IEndpointRouteBuilder Map(IEndpointRouteBuilder endpoints)
     {
         endpoints
             .MapGroup("/v1")

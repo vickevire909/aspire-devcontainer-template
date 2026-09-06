@@ -1,6 +1,5 @@
-using Example.Features.CreateWeatherForecast;
 using Example.Features.GetWeatherForecast;
-using Example.Features.GetWeatherForecastById;
+using Shared.Kernel.Routing;
 using Wolverine;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,12 +26,13 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-app.MapGet("/", () => "API service is running. Navigate to /weatherforecast to see sample data.");
+app.MapGet(
+    "/",
+    () => "API service is running. Navigate to api/v1/weatherforecast to see sample data."
+);
 
 var api = app.MapGroup("/api");
-api.MapGetWeatherForecastEndpoint();
-api.MapGetWeatherForecastByIdEndpoint();
-api.MapCreateWeatherForecastEndpoint();
+api.MapEndpoints();
 
 app.MapDefaultEndpoints();
 

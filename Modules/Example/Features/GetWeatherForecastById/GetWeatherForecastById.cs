@@ -1,18 +1,18 @@
+using Example.Domain;
 using Example.Features.GetWeatherForecast;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
+using Shared.Kernel.Routing;
 using Wolverine;
 
 namespace Example.Features.GetWeatherForecastById;
 
 public sealed record GetWeatherForecastById(Guid Id);
 
-public static class GetWeatherForecastByIdEndpoint
+public sealed class GetWeatherForecastByIdEndpoint : IEndpoint
 {
-    public static IEndpointRouteBuilder MapGetWeatherForecastByIdEndpoint(
-        this IEndpointRouteBuilder endpoints
-    )
+    public IEndpointRouteBuilder Map(IEndpointRouteBuilder endpoints)
     {
         endpoints
             .MapGroup("/v1")

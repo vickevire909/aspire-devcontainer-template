@@ -1,17 +1,17 @@
 using System.Collections.Concurrent;
+using Example.Domain;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
+using Shared.Kernel.Routing;
 using Wolverine;
 
 namespace Example.Features.GetWeatherForecast;
 
 public sealed record GetWeatherForecast;
 
-public static class GetWeatherForecastEndpoint
+public sealed class GetWeatherForecastEndpoint : IEndpoint
 {
-    public static IEndpointRouteBuilder MapGetWeatherForecastEndpoint(
-        this IEndpointRouteBuilder endpoints
-    )
+    public IEndpointRouteBuilder Map(IEndpointRouteBuilder endpoints)
     {
         endpoints
             .MapGroup("/v1")

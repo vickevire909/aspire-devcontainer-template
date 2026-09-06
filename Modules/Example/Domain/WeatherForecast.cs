@@ -1,4 +1,4 @@
-namespace Example;
+namespace Example.Domain;
 
 public sealed record WeatherForecast(Guid Id, DateOnly Date, int TemperatureC, string? Summary)
 {
