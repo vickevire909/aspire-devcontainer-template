@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../Hosts/WebApi/WebApi.csproj" />
+    <ProjectReference Include="..\Hosts\WebApi\WebApi.csproj" />
   </ItemGroup>
 
   <ItemGroup>
