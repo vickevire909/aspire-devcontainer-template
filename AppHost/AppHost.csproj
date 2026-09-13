@@ -11,4 +11,8 @@
   <ItemGroup>
     <ProjectReference Include="../Hosts/WebApi/WebApi.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JasperFx.Aspire" />
+  </ItemGroup>
 </Project>

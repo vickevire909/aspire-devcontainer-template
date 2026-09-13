@@ -1,3 +1,4 @@
+using JasperFx;
 using Modules.Example;
 using Modules.Example.Features.GetWeatherForecast;
 using ServiceDefaults;
@@ -11,8 +12,9 @@ builder.AddServiceDefaults();
 // Add services to the container.
 builder.Services.AddProblemDetails();
 builder.Host.UseWolverine(options =>
-    options.Discovery.IncludeAssembly(typeof(GetWeatherForecastHandler).Assembly)
-);
+{
+    options.Discovery.IncludeAssembly(typeof(GetWeatherForecastHandler).Assembly);
+});
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
@@ -42,4 +44,4 @@ api.MapExampleEndpoints();
 
 app.MapDefaultEndpoints();
 
-app.Run();
+return await app.RunJasperFxCommands(args);
