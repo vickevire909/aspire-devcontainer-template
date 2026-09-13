@@ -22,10 +22,15 @@
   },
   // "forwardPorts": [5000, 5001],
   // "portsAttributes": {
-  //		"5001": {
-  //			"protocol": "https"
-  //		}
-  // }
+  //   "5000": {
+  //     "label": "web-api (http)",
+  //     "protocol": "http"
+  //   },
+  //   "5001": {
+  //     "label": "web-api (https)",
+  //     "protocol": "https"
+  //   }
+  // },
   "remoteEnv": {
     "SSL_CERT_DIR": "$HOME/.aspnet/dev-certs/trust:/usr/lib/ssl/certs"
   },
