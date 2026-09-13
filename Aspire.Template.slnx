@@ -5,7 +5,6 @@
   <Folder Name="/Modules.Example/">
     <Project Path="Modules.Example/Modules.Example.Contracts/Modules.Example.Contracts.csproj" />
     <Project Path="Modules.Example/Modules.Example/Modules.Example.csproj" />
-    <Project Path="Modules.Example/Modules.Example.Http/Modules.Example.Http.csproj" />
     <Project Path="Modules.Example/Modules.Example.Tests/Modules.Example.Tests.csproj" />
   </Folder>
   <Project Path="AppHost.Tests/AppHost.Tests.csproj" />

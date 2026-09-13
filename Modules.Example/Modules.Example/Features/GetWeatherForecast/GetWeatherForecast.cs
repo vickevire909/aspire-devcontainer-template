@@ -1,11 +1,34 @@
-using System.Collections.Concurrent;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Routing;
 using Modules.Example.Domain;
+using Modules.Example.Shared;
+using Shared.Kernel.Http;
+using Wolverine;
 
 namespace Modules.Example.Features.GetWeatherForecast;
 
 public sealed record WeatherForecastRequest;
 
 public sealed record WeatherForecastResponse(IReadOnlyList<WeatherForecast> Data);
+
+public class GetWeatherForecastEndpoints : IModuleEndpoints
+{
+    public void Map(IEndpointRouteBuilder builder)
+    {
+        builder.MapGet("/api/v1/weatherforecast", Handler).WithName("GetWeatherForecast");
+    }
+
+    private static async Task<WeatherForecastResponse> Handler(
+        IMessageBus bus,
+        CancellationToken cancellationToken
+    )
+    {
+        return await bus.InvokeAsync<WeatherForecastResponse>(
+            new WeatherForecastRequest(),
+            cancellationToken
+        );
+    }
+}
 
 public static class GetWeatherForecastHandler
 {
@@ -23,7 +46,10 @@ public static class GetWeatherForecastHandler
         "Scorching",
     ];
 
-    public static WeatherForecastResponse Handle(WeatherForecastRequest _)
+    public static WeatherForecastResponse Handle(
+        WeatherForecastRequest _,
+        WeatherForecastStore weatherForecastStore
+    )
     {
         WeatherForecast[] forecasts =
         [
@@ -39,14 +65,9 @@ public static class GetWeatherForecastHandler
 
         foreach (WeatherForecast? forecast in forecasts)
         {
-            WeatherForecastStore.Items[forecast.Id] = forecast;
+            weatherForecastStore.Items[forecast.Id] = forecast;
         }
 
         return new(forecasts);
     }
-}
-
-internal static class WeatherForecastStore
-{
-    internal static readonly ConcurrentDictionary<Guid, WeatherForecast> Items = new();
 }

@@ -1,5 +1,5 @@
+using Modules.Example;
 using Modules.Example.Features.GetWeatherForecast;
-using Modules.Example.Http;
 using ServiceDefaults;
 using Wolverine;
 
@@ -17,6 +17,9 @@ builder.Host.UseWolverine(options =>
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
+// Add modules services
+builder.AddExample();
+
 WebApplication app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -32,8 +35,9 @@ app.MapGet(
     () => "API service is running. Navigate to api/v1/weatherforecast to see sample data."
 );
 
-RouteGroupBuilder api = app.MapGroup("/api");
+RouteGroupBuilder api = app.MapGroup("");
 
+// Map module endpoints
 api.MapExampleEndpoints();
 
 app.MapDefaultEndpoints();
