@@ -1,7 +1,7 @@
-using Modules.Example.Core.Domain;
-using Modules.Example.Core.Features.GetWeatherForecast;
+using Modules.Example.Domain;
+using Modules.Example.Features.GetWeatherForecast;
 
-namespace Modules.Example.Core.Features.GetWeatherForecastById;
+namespace Modules.Example.Features.GetWeatherForecastById;
 
 public sealed record GetWeatherForecastByIdRequest(Guid Id);
 

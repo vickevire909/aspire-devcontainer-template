@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Modules.Example.Contracts\Modules.Example.Contracts.csproj" />
-    <ProjectReference Include="..\..\Shared.Kernel\Shared.Kernel.csproj" />
+    <ProjectReference Include="../Modules.Example.Contracts/Modules.Example.Contracts.csproj" />
+    <ProjectReference Include="../../Shared.Kernel/Shared.Kernel.csproj" />
   </ItemGroup>
 </Project>

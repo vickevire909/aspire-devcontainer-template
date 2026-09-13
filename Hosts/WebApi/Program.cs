@@ -1,4 +1,4 @@
-using Modules.Example.Core.Features.GetWeatherForecast;
+using Modules.Example.Features.GetWeatherForecast;
 using Modules.Example.Http;
 using ServiceDefaults;
 using Wolverine;

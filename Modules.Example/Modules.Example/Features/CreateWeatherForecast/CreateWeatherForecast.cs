@@ -1,7 +1,7 @@
-using Modules.Example.Core.Domain;
-using Modules.Example.Core.Features.GetWeatherForecast;
+using Modules.Example.Domain;
+using Modules.Example.Features.GetWeatherForecast;
 
-namespace Modules.Example.Core.Features.CreateWeatherForecast;
+namespace Modules.Example.Features.CreateWeatherForecast;
 
 public sealed record CreateWeatherForecastRequest(DateOnly Date, int TemperatureC, string? Summary);
 

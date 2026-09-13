@@ -1,7 +1,7 @@
 using System.Collections.Concurrent;
-using Modules.Example.Core.Domain;
+using Modules.Example.Domain;
 
-namespace Modules.Example.Core.Features.GetWeatherForecast;
+namespace Modules.Example.Features.GetWeatherForecast;
 
 public sealed record WeatherForecastRequest;
 

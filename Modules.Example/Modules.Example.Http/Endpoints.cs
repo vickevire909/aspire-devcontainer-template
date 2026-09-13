@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
-using Modules.Example.Core.Domain;
-using Modules.Example.Core.Features.CreateWeatherForecast;
-using Modules.Example.Core.Features.GetWeatherForecast;
-using Modules.Example.Core.Features.GetWeatherForecastById;
+using Modules.Example.Domain;
+using Modules.Example.Features.CreateWeatherForecast;
+using Modules.Example.Features.GetWeatherForecast;
+using Modules.Example.Features.GetWeatherForecastById;
 using Wolverine;
 
 namespace Modules.Example.Http;

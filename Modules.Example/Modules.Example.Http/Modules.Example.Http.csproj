@@ -10,6 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Modules.Example.Core\Modules.Example.Core.csproj" />
+    <ProjectReference Include="../Modules.Example/Modules.Example.csproj" />
   </ItemGroup>
 </Project>
