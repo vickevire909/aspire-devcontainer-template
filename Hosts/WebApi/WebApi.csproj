@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
   <ItemGroup>
-    <ProjectReference Include="../../Modules.Example/Modules.Example/Modules.Example.csproj" />
+    <ProjectReference Include="../../Modules/Example/Modules.Example/Modules.Example.csproj" />
     <ProjectReference Include="../../Shared.Kernel/Shared.Kernel.csproj" />
     <ProjectReference Include="../../ServiceDefaults/ServiceDefaults.csproj" />
   </ItemGroup>

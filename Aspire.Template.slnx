@@ -1,11 +1,11 @@
 <Solution>
+  <Folder Name="/Example/">
+    <Project Path="Modules/Example/Modules.Example.Contracts/Modules.Example.Contracts.csproj" />
+    <Project Path="Modules/Example/Modules.Example.Tests/Modules.Example.Tests.csproj" />
+    <Project Path="Modules/Example/Modules.Example/Modules.Example.csproj" />
+  </Folder>
   <Folder Name="/Hosts/">
     <Project Path="Hosts/WebApi/WebApi.csproj" />
-  </Folder>
-  <Folder Name="/Modules.Example/">
-    <Project Path="Modules.Example/Modules.Example.Contracts/Modules.Example.Contracts.csproj" />
-    <Project Path="Modules.Example/Modules.Example/Modules.Example.csproj" />
-    <Project Path="Modules.Example/Modules.Example.Tests/Modules.Example.Tests.csproj" />
   </Folder>
   <Project Path="AppHost.Tests/AppHost.Tests.csproj" />
   <Project Path="AppHost/AppHost.csproj" />

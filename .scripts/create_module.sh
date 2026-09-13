@@ -13,10 +13,10 @@ if [[ $# -lt 1 ]]; then
 fi
 
 MODULE_NAME="$1"
-
 MODULE_PREFIX="Modules.$MODULE_NAME"
 
-MODULE_PATH="$WORKSPACE_ROOT/$MODULE_PREFIX"
+MODULES_DIR="$WORKSPACE_ROOT/Modules"
+MODULE_PATH="$MODULES_DIR/$MODULE_NAME"
 
 CORE="$MODULE_PREFIX"
 CONTRACTS="$MODULE_PREFIX.Contracts"
@@ -28,12 +28,12 @@ TESTS_PATH="$MODULE_PATH/$TESTS"
 
 SHARED_KERNEL_PROJECT_PATH="$WORKSPACE_ROOT/Shared.Kernel/Shared.Kernel.csproj"
 
-if [[ -e "$CORE_PATH" || -e "$CONTRACTS_PATH" || -e "$TESTS_PATH" ]]; then
-	echo "Error: module '$MODULE_PREFIX' already exists in $WORKSPACE_ROOT" >&2
+if [[ -e "$MODULE_PATH" ]]; then
+	echo "Error: module '$MODULE_NAME' already exists in $MODULES_DIR" >&2
 	exit 1
 fi
 
-echo "creating new module in $WORKSPACE_ROOT"
+echo "creating new module in $MODULES_DIR"
 
 dotnet new classlib \
 	--name "$CORE" \
