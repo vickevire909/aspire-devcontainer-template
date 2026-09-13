@@ -1,0 +1,21 @@
+@ApiService_HostAddress = http://localhost:5515
+
+GET {{ApiService_HostAddress}}/api/v1/weatherforecast/
+Accept: application/json
+
+###
+
+GET {{ApiService_HostAddress}}/api/v1/weatherforecast/01a09a5f-2db2-7e1c-8d21-62fdea881ac4
+Accept: application/json
+
+###
+
+POST {{ApiService_HostAddress}}/api/v1/weatherforecast/
+Content-Type: application/json
+Accept: application/json
+
+{
+    "date": "2026-08-23",
+    "temperatureC": 8,
+    "summary": "Mild"
+}
