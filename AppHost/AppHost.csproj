@@ -11,8 +11,4 @@
   <ItemGroup>
     <ProjectReference Include="..\Hosts\WebApi\WebApi.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Aspire.Hosting.Redis" />
-  </ItemGroup>
 </Project>

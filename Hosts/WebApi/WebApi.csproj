@@ -1,10 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
-  <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="../../Modules.Example/Modules.Example.Http/Modules.Example.Http.csproj" />
     <ProjectReference Include="..\..\Shared.Kernel\Shared.Kernel.csproj" />

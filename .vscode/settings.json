@@ -1,14 +1,14 @@
 {
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "[csharp]": {
-        "editor.defaultFormatter": "csharpier.csharpier-vscode"
-    },
-    "[xml]": {
-        "editor.defaultFormatter": "csharpier.csharpier-vscode"
-    },
-    "files.exclude": {
-        "**/bin": true,
-        "**/obj": true
-    }
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[csharp]": {
+    "editor.defaultFormatter": "csharpier.csharpier-vscode"
+  },
+  "[xml]": {
+    "editor.defaultFormatter": "csharpier.csharpier-vscode"
+  },
+  "files.exclude": {
+    "**/bin": true,
+    "**/obj": true
+  }
 }

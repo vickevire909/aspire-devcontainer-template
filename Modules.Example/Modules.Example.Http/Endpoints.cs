@@ -9,23 +9,23 @@ using Wolverine;
 
 namespace Modules.Example.Http;
 
-public static class Endpoints
+public static class EndpointExtensions
 {
     extension(IEndpointRouteBuilder endpoints)
     {
         public IEndpointRouteBuilder MapExampleEndpoints()
         {
-            var v1 = endpoints.MapGroup("/v1");
+            RouteGroupBuilder v1 = endpoints.MapGroup("/v1");
 
             v1.MapPost(
                     "/weatherforecast",
                     async (
-                        CreateWeatherForecast request,
+                        CreateWeatherForecastRequest request,
                         IMessageBus bus,
                         CancellationToken cancellationToken
                     ) =>
                     {
-                        var forecast = await bus.InvokeAsync<WeatherForecast>(
+                        WeatherForecast forecast = await bus.InvokeAsync<WeatherForecast>(
                             request,
                             cancellationToken
                         );
@@ -42,7 +42,7 @@ public static class Endpoints
                     "/weatherforecast",
                     async (IMessageBus bus, CancellationToken cancellationToken) =>
                         await bus.InvokeAsync<WeatherForecast[]>(
-                            new GetWeatherForecast(),
+                            new WeatherForecastRequest(),
                             cancellationToken
                         )
                 )
@@ -52,8 +52,8 @@ public static class Endpoints
                     "/weatherforecast/{id:guid}",
                     async (Guid id, IMessageBus bus, CancellationToken cancellationToken) =>
                     {
-                        var forecast = await bus.InvokeAsync<WeatherForecast?>(
-                            new GetWeatherForecastById(id),
+                        WeatherForecast? forecast = await bus.InvokeAsync<WeatherForecast?>(
+                            new GetWeatherForecastByIdRequest(id),
                             cancellationToken
                         );
                         return forecast is null ? Results.NotFound() : Results.Ok(forecast);

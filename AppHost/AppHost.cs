@@ -1,5 +1,7 @@
-var builder = DistributedApplication.CreateBuilder(args);
+IDistributedApplicationBuilder builder = DistributedApplication.CreateBuilder(args);
 
-var _ = builder.AddProject<Projects.WebApi>("web-api").WithHttpHealthCheck("/health");
+IResourceBuilder<ProjectResource> _ = builder
+    .AddProject<Projects.WebApi>("web-api")
+    .WithHttpHealthCheck("/health");
 
 builder.Build().Run();

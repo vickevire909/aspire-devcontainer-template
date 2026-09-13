@@ -1,8 +1,9 @@
 using Modules.Example.Core.Features.GetWeatherForecast;
 using Modules.Example.Http;
+using ServiceDefaults;
 using Wolverine;
 
-var builder = WebApplication.CreateBuilder(args);
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Add service defaults & Aspire client integrations.
 builder.AddServiceDefaults();
@@ -16,7 +17,7 @@ builder.Host.UseWolverine(options =>
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
-var app = builder.Build();
+WebApplication app = builder.Build();
 
 // Configure the HTTP request pipeline.
 app.UseExceptionHandler();
@@ -31,7 +32,7 @@ app.MapGet(
     () => "API service is running. Navigate to api/v1/weatherforecast to see sample data."
 );
 
-var api = app.MapGroup("/api");
+RouteGroupBuilder api = app.MapGroup("/api");
 
 api.MapExampleEndpoints();
 

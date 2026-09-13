@@ -1,3 +1,4 @@
+using Aspire.Hosting;
 using Microsoft.Extensions.Logging;
 
 namespace AppHost.Tests;
@@ -10,11 +11,12 @@ public class WebTests
     public async Task GetWebApiRootReturnsOkStatusCode()
     {
         // Arrange
-        var cancellationToken = TestContext.Current.CancellationToken;
+        CancellationToken cancellationToken = TestContext.Current.CancellationToken;
 
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.AppHost>(
-            cancellationToken
-        );
+        IDistributedApplicationTestingBuilder appHost =
+            await DistributedApplicationTestingBuilder.CreateAsync<Projects.AppHost>(
+                cancellationToken
+            );
         appHost.Services.AddLogging(logging =>
         {
             logging.SetMinimumLevel(LogLevel.Debug);
@@ -28,17 +30,17 @@ public class WebTests
             clientBuilder.AddStandardResilienceHandler();
         });
 
-        await using var app = await appHost
+        await using DistributedApplication app = await appHost
             .BuildAsync(cancellationToken)
             .WaitAsync(DefaultTimeout, cancellationToken);
         await app.StartAsync(cancellationToken).WaitAsync(DefaultTimeout, cancellationToken);
 
         // Act
-        var httpClient = app.CreateHttpClient("web-api");
+        using HttpClient httpClient = app.CreateHttpClient("web-api");
         await app
             .ResourceNotifications.WaitForResourceHealthyAsync("web-api", cancellationToken)
             .WaitAsync(DefaultTimeout, cancellationToken);
-        var response = await httpClient.GetAsync("/", cancellationToken);
+        HttpResponseMessage response = await httpClient.GetAsync("/", cancellationToken);
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);

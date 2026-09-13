@@ -3,11 +3,13 @@ using Modules.Example.Core.Features.GetWeatherForecast;
 
 namespace Modules.Example.Core.Features.CreateWeatherForecast;
 
-public sealed record CreateWeatherForecast(DateOnly Date, int TemperatureC, string? Summary);
+public sealed record CreateWeatherForecastRequest(DateOnly Date, int TemperatureC, string? Summary);
+
+public sealed record CreateWeatherForecastResponse(WeatherForecast Data);
 
 public static class CreateWeatherForecastHandler
 {
-    public static WeatherForecast Handle(CreateWeatherForecast request)
+    public static CreateWeatherForecastResponse Handle(CreateWeatherForecastRequest request)
     {
         var forecast = new WeatherForecast(
             Guid.CreateVersion7(),
@@ -16,6 +18,6 @@ public static class CreateWeatherForecastHandler
             request.Summary
         );
         WeatherForecastStore.Items[forecast.Id] = forecast;
-        return forecast;
+        return new(forecast);
     }
 }

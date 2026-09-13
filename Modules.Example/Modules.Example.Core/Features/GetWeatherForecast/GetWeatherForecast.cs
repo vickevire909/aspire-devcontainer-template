@@ -3,7 +3,9 @@ using Modules.Example.Core.Domain;
 
 namespace Modules.Example.Core.Features.GetWeatherForecast;
 
-public sealed record GetWeatherForecast;
+public sealed record WeatherForecastRequest;
+
+public sealed record WeatherForecastResponse(IReadOnlyList<WeatherForecast> Data);
 
 public static class GetWeatherForecastHandler
 {
@@ -21,24 +23,26 @@ public static class GetWeatherForecastHandler
         "Scorching",
     ];
 
-    public static WeatherForecast[] Handle(GetWeatherForecast _)
+    public static WeatherForecastResponse Handle(WeatherForecastRequest _)
     {
-        var forecasts = Enumerable
-            .Range(1, 5)
-            .Select(index => new WeatherForecast(
-                Guid.CreateVersion7(),
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(index)),
-                Random.Shared.Next(-20, 55),
-                Summaries[Random.Shared.Next(Summaries.Length)]
-            ))
-            .ToArray();
+        WeatherForecast[] forecasts =
+        [
+            .. Enumerable
+                .Range(1, 5)
+                .Select(index => new WeatherForecast(
+                    Guid.CreateVersion7(),
+                    DateOnly.FromDateTime(DateTime.UtcNow.AddDays(index)),
+                    Random.Shared.Next(-20, 55),
+                    Summaries[Random.Shared.Next(Summaries.Length)]
+                )),
+        ];
 
-        foreach (var forecast in forecasts)
+        foreach (WeatherForecast? forecast in forecasts)
         {
             WeatherForecastStore.Items[forecast.Id] = forecast;
         }
 
-        return forecasts;
+        return new(forecasts);
     }
 }
 

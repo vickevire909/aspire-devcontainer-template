@@ -3,12 +3,14 @@ using Modules.Example.Core.Features.GetWeatherForecast;
 
 namespace Modules.Example.Core.Features.GetWeatherForecastById;
 
-public sealed record GetWeatherForecastById(Guid Id);
+public sealed record GetWeatherForecastByIdRequest(Guid Id);
+
+public sealed record GetWeatherForecastByIdResponse(WeatherForecast? Data);
 
 public static class GetWeatherForecastByIdHandler
 {
-    public static WeatherForecast? Handle(GetWeatherForecastById request)
+    public static GetWeatherForecastByIdResponse Handle(GetWeatherForecastByIdRequest request)
     {
-        return WeatherForecastStore.Items.GetValueOrDefault(request.Id);
+        return new(WeatherForecastStore.Items.GetValueOrDefault(request.Id));
     }
 }
