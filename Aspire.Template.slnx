@@ -5,7 +5,14 @@
     <Project Path="Modules/Example/Modules.Example/Modules.Example.csproj" />
   </Folder>
   <Folder Name="/Hosts/">
-    <Project Path="Hosts/WebApi/WebApi.csproj" />
+    <Project Path="Hosts/Hosts.WebApi/Hosts.WebApi.csproj" />
+    <Project Path="Hosts/Hosts.Worker/Hosts.Worker.csproj" />
+  </Folder>
+  <Folder Name="/Modules/" />
+  <Folder Name="/Modules/Reporting/">
+    <Project Path="Modules/Reporting/Modules.Reporting.Contracts/Modules.Reporting.Contracts.csproj" />
+    <Project Path="Modules/Reporting/Modules.Reporting.Tests/Modules.Reporting.Tests.csproj" />
+    <Project Path="Modules/Reporting/Modules.Reporting/Modules.Reporting.csproj" />
   </Folder>
   <Project Path="AppHost.Tests/AppHost.Tests.csproj" />
   <Project Path="AppHost/AppHost.csproj" />

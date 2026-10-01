@@ -1,7 +1,13 @@
 IDistributedApplicationBuilder builder = DistributedApplication.CreateBuilder(args);
 
-IResourceBuilder<ProjectResource> _ = builder
-    .AddProject<Projects.WebApi>("web-api")
-    .WithHttpHealthCheck("/health");
+var sb = builder.AddAzureServiceBus("servicebus").RunAsEmulator().AddServiceBusQueue("weather");
+
+var _ = builder
+    .AddProject<Projects.Hosts_WebApi>("web-api")
+    .WithHttpHealthCheck("/health")
+    .WithReference(sb)
+    .WaitFor(sb);
+
+// builder.AddProject<Projects.Hosts_Worker>("worker").WithReference(sb).WaitFor(sb).WaitFor(api);
 
 builder.Build().Run();

@@ -3,6 +3,7 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <ItemGroup>
+    <PackageVersion Include="Aspire.Hosting.Azure.ServiceBus" Version="13.5.3" />
     <PackageVersion Include="Aspire.Hosting.Redis" Version="13.5.3" />
     <PackageVersion Include="Aspire.Hosting.Testing" Version="13.5.3" />
     <PackageVersion Include="coverlet.collector" Version="10.0.1" />
@@ -16,9 +17,11 @@
     <PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.18.0" />
     <PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.18.0" />
     <PackageVersion Include="OpenTelemetry.Instrumentation.Runtime" Version="1.18.0" />
-    <PackageVersion Include="WolverineFx" Version="6.33.0" />
-    <PackageVersion Include="WolverineFx.RuntimeCompilation" Version="6.33.0" />
+    <PackageVersion Include="WolverineFx" Version="6.36.0" />
+    <PackageVersion Include="WolverineFx.AzureServiceBus" Version="6.36.0" />
+    <PackageVersion Include="WolverineFx.RuntimeCompilation" Version="6.36.0" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="4.0.0" />
     <PackageVersion Include="xunit.v3.mtp-v2" Version="4.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="10.0.12" />
   </ItemGroup>
 </Project>

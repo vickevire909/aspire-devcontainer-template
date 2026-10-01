@@ -9,10 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../Hosts/WebApi/WebApi.csproj" />
+    <ProjectReference Include="../Hosts/Hosts.WebApi/Hosts.WebApi.csproj" />
+    <ProjectReference Include="../Hosts/Hosts.Worker/Hosts.Worker.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.Azure.ServiceBus" />
     <PackageReference Include="JasperFx.Aspire" />
   </ItemGroup>
 </Project>

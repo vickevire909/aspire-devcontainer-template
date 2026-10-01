@@ -15,10 +15,12 @@ public class GetWeatherForecastEndpoints : IModuleEndpoints
 {
     public void Map(IEndpointRouteBuilder builder)
     {
-        builder.MapGet("/api/v1/weatherforecast", Handler).WithName("GetWeatherForecast");
+        builder
+            .MapGet("/api/v1/weatherforecast", GetWeatherForecast)
+            .WithName(nameof(GetWeatherForecast));
     }
 
-    private static async Task<WeatherForecastResponse> Handler(
+    private static async Task<WeatherForecastResponse> GetWeatherForecast(
         IMessageBus bus,
         CancellationToken cancellationToken
     )

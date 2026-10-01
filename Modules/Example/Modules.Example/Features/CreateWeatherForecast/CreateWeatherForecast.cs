@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Routing;
+using Modules.Example.Contracts.Events;
 using Modules.Example.Domain;
 using Modules.Example.Shared;
 using Shared.Kernel.Http;
@@ -17,36 +18,44 @@ public class CreateWeatherForecastEndpoints : IModuleEndpoints
 {
     public void Map(IEndpointRouteBuilder builder)
     {
-        builder.MapPost("/api/v1/weatherforecast", Handler).WithName("CreateWeatherForecast");
+        builder
+            .MapPost("/api/v1/weatherforecast", CreateWeatherForecast)
+            .WithName(nameof(CreateWeatherForecast));
     }
 
-    private async Task<Created<CreateWeatherForecastResponse>> Handler(
+    private async Task<Created> CreateWeatherForecast(
         CreateWeatherForecastRequest request,
         IMessageBus bus,
         CancellationToken cancellationToken
     )
     {
-        CreateWeatherForecastResponse forecast =
-            await bus.InvokeAsync<CreateWeatherForecastResponse>(request, cancellationToken);
+        WeatherForecastCreatedEvent created = await bus.InvokeAsync<WeatherForecastCreatedEvent>(
+            request,
+            cancellationToken
+        );
 
-        return TypedResults.Created($"/api/v1/weatherforecast/{forecast.Data.Id}", forecast);
+        return TypedResults.Created($"/api/v1/weatherforecast/{created.ForecastId}");
     }
 }
 
 public static class CreateWeatherForecastHandler
 {
-    public static CreateWeatherForecastResponse Handle(
+    public static (WeatherForecast, WeatherForecastCreatedEvent) Handle(
         CreateWeatherForecastRequest request,
         WeatherForecastStore weatherForecastStore
     )
     {
-        var forecast = new WeatherForecast(
+        var response = new WeatherForecast(
             Guid.CreateVersion7(),
             request.Date,
             request.TemperatureC,
             request.Summary
         );
-        weatherForecastStore.Items[forecast.Id] = forecast;
-        return new(forecast);
+
+        weatherForecastStore.Items[response.Id] = response;
+
+        var createdEvent = new WeatherForecastCreatedEvent(response.Id, DateTimeOffset.UtcNow);
+
+        return (response, createdEvent);
     }
 }

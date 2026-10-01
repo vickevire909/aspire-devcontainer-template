@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <PackageReference Include="WolverineFx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Modules.Reporting.Contracts\Modules.Reporting.Contracts.csproj" />
+    <ProjectReference Include="..\..\Example\Modules.Example.Contracts\Modules.Example.Contracts.csproj" />
+    <ProjectReference Include="..\..\..\Shared.Kernel\Shared.Kernel.csproj" />
+  </ItemGroup>
+</Project>
