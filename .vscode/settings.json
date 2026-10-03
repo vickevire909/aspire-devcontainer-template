@@ -1,14 +1,62 @@
 {
-  "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[csharp]": {
     "editor.defaultFormatter": "csharpier.csharpier-vscode"
   },
   "[xml]": {
     "editor.defaultFormatter": "csharpier.csharpier-vscode"
   },
+  "[css]": {
+    "editor.defaultFormatter": "vscode.css-language-features"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "vscode.css-language-features"
+  },
+  "[less]": {
+    "editor.defaultFormatter": "vscode.css-language-features"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "vscode.markdown-language-features"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "editor.formatOnSave": true,
+  "dotnet.defaultSolution": "Aspire.Template.slnx",
+  "terminal.integrated.cwd": "${workspaceFolder}",
   "files.exclude": {
-    "**/bin": true,
-    "**/obj": true
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/.jj": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "**/{bin,obj}/": true
+  },
+  "files.watcherExclude": {
+    ".git/objects/**": true,
+    ".git/subtree-cache/**": true,
+    ".hg/store/**": true,
+    "*/.git/objects/**": true,
+    "*/.git/subtree-cache/**": true,
+    "*/.hg/store/**": true,
+    "**/{bin,obj}/": true
   }
 }

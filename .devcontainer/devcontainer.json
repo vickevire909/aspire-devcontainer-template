@@ -1,46 +1,42 @@
-// For format details, see https://aka.ms/devcontainer.json. For config options, see the
-// README at: https://github.com/devcontainers/templates/tree/main/src/dotnet
 {
-  "name": "Aspire",
+  "name": "Aspire Devcontainer Template",
   "build": {
     "dockerfile": "Dockerfile.dev"
   },
+  "mounts": [
+    "source=projectname-bashhistory,target=/commandhistory,type=volume",
+    "source=aspire-codex,target=/home/vscode/.codex,type=volume"
+  ],
+  "runArgs": [
+    "--security-opt",
+    "seccomp=unconfined" // Enable Codex sandbox
+  ],
+  "remoteEnv": {
+    "SSL_CERT_DIR": "$HOME/.aspnet/dev-certs/trust:/usr/lib/ssl/certs",
+    "GH_TOKEN": "${localEnv:GH_TOKEN}"
+  },
+  "postCreateCommand": {
+    "Set bash history volume permissions": "sudo chown -R $(whoami): /commandhistory",
+    "Set Codex volume permissions": "sudo chown -R $(whoami): $HOME/.codex",
+    "Restore .NET solution": "dotnet restore || true",
+    "Restore .NET tools": "dotnet tool restore || true"
+  },
+  "postStartCommand": {
+    "Install .NET dev certs": "export SSL_CERT_DIR=\"$HOME/.aspnet/dev-certs/trust:/usr/lib/ssl/certs\" && dotnet dev-certs https --trust || true"
+  },
   "features": {
-    "ghcr.io/microsoft/aspire-devcontainer-feature/aspire:2": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/microsoft/aspire-devcontainer-feature/aspire:3.0.0": {},
     "ghcr.io/devcontainers/features/powershell:2.0.3": {},
     "ghcr.io/devcontainers/features/python:1": {},
     "ghcr.io/devcontainers-extra/features/uv:1": {},
     "ghcr.io/devcontainers/features/node:2.1.0": {
       "version": "lts"
     },
-    "ghcr.io/devcontainers/features/docker-in-docker:4.1.0": {
+    "ghcr.io/devcontainers/features/docker-in-docker:4.1.2": {
       "enableNonRootDocker": true,
       "moby": true
-    },
-    "ghcr.io/devcontainers/features/node:2": {},
-    "ghcr.io/devcontainers/features/powershell:2": {}
-  },
-  // "forwardPorts": [5000, 5001],
-  // "portsAttributes": {
-  //   "5000": {
-  //     "label": "web-api (http)",
-  //     "protocol": "http"
-  //   },
-  //   "5001": {
-  //     "label": "web-api (https)",
-  //     "protocol": "https"
-  //   }
-  // },
-  "remoteEnv": {
-    "SSL_CERT_DIR": "$HOME/.aspnet/dev-certs/trust:/usr/lib/ssl/certs"
-  },
-  "postCreateCommand": {
-    "dotnetRestore": "dotnet restore",
-    "dotnetToolRestore": "dotnet tool restore",
-    "dotnetInstallXUnitTemplates": "dotnet new install xunit.v3.templates"
-  },
-  "postStartCommand": {
-    "devcerts": "export SSL_CERT_DIR=\"$HOME/.aspnet/dev-certs/trust:/usr/lib/ssl/certs\" && dotnet dev-certs https --trust || true"
+    }
   },
   "customizations": {
     "vscode": {
@@ -49,10 +45,11 @@
         "microsoft-aspire.aspire-vscode",
         "csharpier.csharpier-vscode",
         "esbenp.prettier-vscode",
-        "humao.rest-client"
-      ]
+        "humao.rest-client",
+        "github.vscode-pull-request-github",
+        "openai.chatgpt"
+      ],
+      "terminal.integrated.inheritEnv": true
     }
   }
-  // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-  // "remoteUser": "root"
 }

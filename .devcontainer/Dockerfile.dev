@@ -1,1 +1,28 @@
 FROM mcr.microsoft.com/devcontainers/dotnet:dev-10.0-noble
+
+ARG USERNAME=vscode
+
+ENV PATH="/home/${USERNAME}/.local/bin:${PATH}"
+
+USER ${USERNAME}
+
+# Install user-scoped templates once per image build, rather than container creation.
+RUN dotnet new install xunit.v3.templates
+
+# Keep the installed package outside the runtime ~/.codex volume mount.
+# CODEX_HOME applies only to this installation; runtime config still uses ~/.codex.
+RUN curl -fsSL https://chatgpt.com/codex/install.sh -o /tmp/codex-install.sh \
+    && CODEX_NON_INTERACTIVE=1 \
+       CODEX_HOME="/home/${USERNAME}/.local/share/codex-install" \
+       CODEX_INSTALL_DIR="/home/${USERNAME}/.local/bin" \
+       sh /tmp/codex-install.sh \
+    && codex --version \
+    && rm /tmp/codex-install.sh
+
+USER root
+
+RUN SNIPPET="export PROMPT_COMMAND='history -a' && export HISTFILE=/commandhistory/.bash_history" \
+    && mkdir /commandhistory \
+    && touch /commandhistory/.bash_history \
+    && chown -R $USERNAME /commandhistory \
+    && echo "$SNIPPET" >> "/home/$USERNAME/.bashrc"
