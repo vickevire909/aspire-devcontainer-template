@@ -18,7 +18,7 @@ builder.UseWolverine(opts =>
     }
     else
     {
-        var connectionString = builder.Configuration.GetConnectionString("sbemulatorns");
+        var connectionString = builder.Configuration.GetConnectionString("servicebus");
         if (string.IsNullOrWhiteSpace(connectionString))
         {
             throw new InvalidOperationException(
