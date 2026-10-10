@@ -1,5 +1,12 @@
 {
   "name": "Aspire Devcontainer Template",
+  "forwardPorts": [18080],
+  "portsAttributes": {
+    "18080": {
+      "label": "Scalar API Reference",
+      "requireLocalPort": true
+    }
+  },
   "build": {
     "dockerfile": "Dockerfile.dev"
   },

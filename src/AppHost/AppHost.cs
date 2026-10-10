@@ -34,7 +34,7 @@ var api = builder
 
 if (builder.ExecutionContext.IsRunMode)
 {
-    builder.AddScalarApiReference().WithApiReference(api);
+    builder.AddScalarApiReference("scalar", port: 18080).WithApiReference(api);
 }
 
 builder.AddProject<Projects.Hosts_Worker>("worker").WithReference(sb).WaitFor(sb).WaitFor(api);

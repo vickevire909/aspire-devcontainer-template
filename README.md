@@ -49,8 +49,10 @@ volumes are preserved unless `--volumes` is also supplied.
 
 ## API documentation
 
-When running locally with Aspire, open the `scalar` resource endpoint in the
-Aspire dashboard to browse the Web API and send requests. Scalar uses the Web
+When running locally with Aspire, open <http://localhost:18080/> or the `scalar`
+resource endpoint in the Aspire dashboard to browse the Web API and send requests.
+Scalar uses a fixed host port of `18080`, which the devcontainer forwards to the
+same local port so the URL can be bookmarked. Scalar uses the Web
 API's existing OpenAPI document at `/openapi/v1.json`, which is available in the
 Development environment. The Scalar resource is only added in Aspire run mode.
 
