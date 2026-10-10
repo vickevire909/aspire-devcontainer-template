@@ -1,0 +1,4 @@
+**/[Gg]enerated/**
+**/[Mm]igrations/**
+**/[Dd]ist/**
+*.gen.cs
