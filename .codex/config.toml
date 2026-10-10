@@ -1,0 +1,8 @@
+default_permissions = "workspace-network"
+
+[permissions.workspace-network]
+description = "Workspace editing with outbound network access"
+extends = ":workspace"
+
+[permissions.workspace-network.network]
+enabled = true
