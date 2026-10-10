@@ -1,7 +1,9 @@
 default_permissions = "workspace-network"
+approval_policy = "on-request"
+approvals_reviewer = "auto_review"
 
 [permissions.workspace-network]
-description = "Workspace editing with outbound network access"
+description = "Workspace editing and network access with automatic approval review"
 extends = ":workspace"
 
 [permissions.workspace-network.network]
