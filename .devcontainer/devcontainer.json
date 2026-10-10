@@ -8,6 +8,8 @@
     "source=aspire-codex,target=/home/vscode/.codex,type=volume"
   ],
   "runArgs": [
+    "--name",
+    "aspire-devcontainer-template",
     "--security-opt",
     "seccomp=unconfined" // Enable Codex sandbox
   ],
@@ -25,17 +27,14 @@
     "Install .NET dev certs": "export SSL_CERT_DIR=\"$HOME/.aspnet/dev-certs/trust:/usr/lib/ssl/certs\" && dotnet dev-certs https --trust || true"
   },
   "features": {
-    "ghcr.io/devcontainers/features/github-cli:1": {},
-    "ghcr.io/microsoft/aspire-devcontainer-feature/aspire:3.0.0": {},
-    "ghcr.io/devcontainers/features/powershell:2.0.3": {},
-    "ghcr.io/devcontainers/features/python:1": {},
-    "ghcr.io/devcontainers-extra/features/uv:1": {},
-    "ghcr.io/devcontainers/features/node:2.1.0": {
-      "version": "lts"
-    },
-    "ghcr.io/devcontainers/features/docker-in-docker:4.1.2": {
+    "ghcr.io/devcontainers/features/docker-in-docker:4.1.3": {
       "enableNonRootDocker": true,
       "moby": true
+    },
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/microsoft/aspire-devcontainer-feature/aspire:3.0.0": {},
+    "ghcr.io/devcontainers/features/node:2.1.1": {
+      "version": "lts"
     }
   },
   "customizations": {
@@ -46,8 +45,7 @@
         "csharpier.csharpier-vscode",
         "esbenp.prettier-vscode",
         "humao.rest-client",
-        "github.vscode-pull-request-github",
-        "openai.chatgpt"
+        "github.vscode-pull-request-github"
       ],
       "terminal.integrated.inheritEnv": true
     }
