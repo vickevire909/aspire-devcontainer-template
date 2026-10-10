@@ -1,3 +1,4 @@
+using JasperFx;
 using Modules.Reporting;
 using Modules.Reporting.Features.FileWeatherReport;
 using ServiceDefaults;
@@ -35,4 +36,4 @@ builder.AddReporting();
 
 using IHost host = builder.Build();
 
-await host.RunAsync();
+return await host.RunJasperFxCommands(args);

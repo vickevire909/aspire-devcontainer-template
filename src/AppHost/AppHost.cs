@@ -1,3 +1,4 @@
+using JasperFx.Aspire;
 using Scalar.Aspire;
 
 IDistributedApplicationBuilder builder = DistributedApplication.CreateBuilder(args);
@@ -30,13 +31,25 @@ var api = builder
     .AddProject<Projects.Hosts_WebApi>("web-api")
     .WithHttpHealthCheck("/health")
     .WithReference(sb)
-    .WaitFor(sb);
+    .WaitFor(sb)
+    .WithJasperFxCommands(opts =>
+    {
+        opts.IncludeMutatingCommands = true; // adds: Apply resources, Write generated code
+    });
 
 if (builder.ExecutionContext.IsRunMode)
 {
     builder.AddScalarApiReference("scalar", port: 18080).WithApiReference(api);
 }
 
-builder.AddProject<Projects.Hosts_Worker>("worker").WithReference(sb).WaitFor(sb).WaitFor(api);
+builder
+    .AddProject<Projects.Hosts_Worker>("worker")
+    .WithReference(sb)
+    .WaitFor(sb)
+    .WaitFor(api)
+    .WithJasperFxCommands(opts =>
+    {
+        opts.IncludeMutatingCommands = true; // adds: Apply resources, Write generated code
+    });
 
 builder.Build().Run();
