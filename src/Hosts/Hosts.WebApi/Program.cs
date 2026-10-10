@@ -53,11 +53,6 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-app.MapGet(
-    "/api",
-    () => "API service is running. Navigate to api/v1/weatherforecast to see sample data."
-);
-
 // Map module endpoints
 app.MapExampleEndpoints();
 app.MapReportingEndpoints();
