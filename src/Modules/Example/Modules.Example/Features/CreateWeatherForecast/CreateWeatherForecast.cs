@@ -29,12 +29,9 @@ public class CreateWeatherForecastEndpoints : IModuleEndpoints
         CancellationToken cancellationToken
     )
     {
-        WeatherForecastCreatedEvent created = await bus.InvokeAsync<WeatherForecastCreatedEvent>(
-            request,
-            cancellationToken
-        );
+        WeatherForecast res = await bus.InvokeAsync<WeatherForecast>(request, cancellationToken);
 
-        return TypedResults.Created($"/api/v1/weatherforecast/{created.ForecastId}");
+        return TypedResults.Created($"/api/v1/weatherforecast/{res.Id}");
     }
 }
 

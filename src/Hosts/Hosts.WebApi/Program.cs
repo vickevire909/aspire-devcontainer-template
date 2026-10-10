@@ -19,14 +19,13 @@ builder.Host.UseWolverine(opts =>
     opts.Discovery.IncludeAssembly(typeof(GetWeatherForecastHandler).Assembly);
     opts.Discovery.IncludeAssembly(typeof(FileWeatherReportHandler).Assembly);
 
-    var connectionString = builder.Configuration.GetConnectionString("servicebus");
-
     if (builder.Environment.IsDevelopment())
     {
-        opts.UseAzureServiceBusEmulator().SystemQueuesAreEnabled(false);
+        opts.UseAzureServiceBusEmulator().AutoProvision().AutoPurgeOnStartup();
     }
     else
     {
+        var connectionString = builder.Configuration.GetConnectionString("sbemulatorns");
         if (string.IsNullOrWhiteSpace(connectionString))
         {
             throw new InvalidOperationException(
@@ -37,8 +36,6 @@ builder.Host.UseWolverine(opts =>
     }
 
     opts.PublishMessage<WeatherForecastCreatedEvent>().ToAzureServiceBusQueue("weather");
-
-    opts.ListenToAzureServiceBusQueue("weather");
 });
 
 builder.Services.AddOpenApi();
@@ -57,15 +54,13 @@ if (app.Environment.IsDevelopment())
 }
 
 app.MapGet(
-    "/",
+    "/api",
     () => "API service is running. Navigate to api/v1/weatherforecast to see sample data."
 );
 
-RouteGroupBuilder api = app.MapGroup("");
-
 // Map module endpoints
-api.MapExampleEndpoints();
-api.MapReportingEndpoints();
+app.MapExampleEndpoints();
+app.MapReportingEndpoints();
 
 app.MapDefaultEndpoints();
 

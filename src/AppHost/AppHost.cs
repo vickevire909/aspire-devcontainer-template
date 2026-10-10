@@ -3,7 +3,7 @@ using Scalar.Aspire;
 IDistributedApplicationBuilder builder = DistributedApplication.CreateBuilder(args);
 
 var sb = builder
-    .AddAzureServiceBus("servicebus")
+    .AddAzureServiceBus("sbemulatorns")
     .RunAsEmulator(emulator =>
     {
         emulator.WithLifetime(ContainerLifetime.Persistent);
@@ -37,6 +37,6 @@ if (builder.ExecutionContext.IsRunMode)
     builder.AddScalarApiReference().WithApiReference(api);
 }
 
-// builder.AddProject<Projects.Hosts_Worker>("worker").WithReference(sb).WaitFor(sb).WaitFor(api);
+builder.AddProject<Projects.Hosts_Worker>("worker").WithReference(sb).WaitFor(sb).WaitFor(api);
 
 builder.Build().Run();
