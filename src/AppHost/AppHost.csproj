@@ -16,5 +16,6 @@
   <ItemGroup>
     <PackageReference Include="Aspire.Hosting.Azure.ServiceBus" />
     <PackageReference Include="JasperFx.Aspire" />
+    <PackageReference Include="Scalar.Aspire" />
   </ItemGroup>
 </Project>

@@ -27,7 +27,20 @@ This is a repository template to streamline the process of getting started with 
 `-- .scripts/create_module.sh          Module scaffolding script
 ```
 
-### Create a module
+## Service Bus emulator
+
+The Service Bus emulator and its SQL Server dependency keep running when Aspire
+stops. The emulator binds directly to the documented default host ports: `5672`
+for AMQP and `5300` for HTTP management and health checks.
+
+## API documentation
+
+When running locally with Aspire, open the `scalar` resource endpoint in the
+Aspire dashboard to browse the Web API and send requests. Scalar uses the Web
+API's existing OpenAPI document at `/openapi/v1.json`, which is available in the
+Development environment. The Scalar resource is only added in Aspire run mode.
+
+## Create a module
 
 From the repository root, run:
 
