@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Modules.Example.Domain;
 using Modules.Example.Shared;
@@ -17,6 +18,7 @@ public class GetWeatherForecastEndpoints : IModuleEndpoints
     {
         builder
             .MapGet("/api/v1/weatherforecast", GetWeatherForecast)
+            .WithTags("Weather forecast")
             .WithName(nameof(GetWeatherForecast));
     }
 

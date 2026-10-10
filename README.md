@@ -56,6 +56,10 @@ same local port so the URL can be bookmarked. Scalar uses the Web
 API's existing OpenAPI document at `/openapi/v1.json`, which is available in the
 Development environment. The Scalar resource is only added in Aspire run mode.
 
+Control Scalar's endpoint groupings with `.WithTags("Group name")` on each endpoint
+mapping. Endpoints with the same tag appear together; the weather endpoints use
+`Weather forecast`. `.WithName(...)` sets the operation name rather than its group.
+
 ## Create a module
 
 From the repository root, run:

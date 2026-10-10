@@ -20,6 +20,7 @@ public class CreateWeatherForecastEndpoints : IModuleEndpoints
     {
         builder
             .MapPost("/api/v1/weatherforecast", CreateWeatherForecast)
+            .WithTags("Weather forecast")
             .WithName(nameof(CreateWeatherForecast));
     }
 

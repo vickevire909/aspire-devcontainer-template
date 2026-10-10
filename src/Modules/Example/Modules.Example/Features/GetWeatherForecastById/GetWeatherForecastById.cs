@@ -19,6 +19,7 @@ public class GetWeatherForecastByIdEndpoints : IModuleEndpoints
     {
         builder
             .MapGet("/api/v1/weatherforecast/{id:guid}", GetWeatherForecastById)
+            .WithTags("Weather forecast")
             .WithName(nameof(GetWeatherForecastById));
     }
 
