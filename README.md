@@ -29,9 +29,23 @@ This is a repository template to streamline the process of getting started with 
 
 ## Service Bus emulator
 
-The Service Bus emulator and its SQL Server dependency keep running when Aspire
-stops. The emulator binds directly to the documented default host ports: `5672`
-for AMQP and `5300` for HTTP management and health checks.
+**The following settings are required for this application's Wolverine integration:**
+
+1. **Keep the emulator's host ports fixed to their defaults:** `5672` for AMQP
+   and `5300` for HTTP management and health checks. Wolverine's emulator
+   auto-provisioning expects these default ports and cannot be configured to use
+   different ports in this setup. Aspire otherwise randomizes host ports. Keep
+   both explicit port assignments and `IsProxied = false` in the AppHost.
+2. **Keep the emulator configured with `ContainerLifetime.Persistent`.** Manual
+   testing found that restarting the Service Bus resource in Aspire with fixed
+   ports causes port collisions and prevents the emulator from starting.
+   Persistent lifetime keeps the emulator and its SQL Server dependency running
+   across AppHost stops and starts, avoiding that restart cycle.
+
+These settings must be kept together; changing either breaks this local setup.
+Avoid restarting the Service Bus resource from the Aspire dashboard. To stop the
+AppHost and remove its persistent resources, use `aspire stop --force`; persistent
+volumes are preserved unless `--volumes` is also supplied.
 
 ## API documentation
 
