@@ -9,18 +9,21 @@ This is a repository template to streamline the process of getting started with 
 
 ```
 .
-|-- AppHost/                           Aspire orchestration and deployment model
-|-- AppHost.Tests/                     AppHost integration tests
-|-- Hosts/                             Deployable applications
-|   `-- WebApi/                         Example ASP.NET Core host
-|-- Modules/                           Example modules
-|   `-- Example/                       Example module directory
-|       |-- Modules.Example/          Module implementation project
-|       |-- Modules.Example.Contracts/ Public contracts for the module
-|       `-- Modules.Example.Tests/    Module tests
-|-- ServiceDefaults/                   Shared Aspire service configuration
-|-- Shared.Kernel/                     Cross-cutting application helpers and infra plumbing
-|-- Aspire.Template.slnx               Solution
+|-- src/                              Application and test projects
+|   |-- AppHost/                      Aspire orchestration and deployment model
+|   |-- AppHost.Tests/                AppHost integration tests
+|   |-- Hosts/                        Deployable applications
+|   |   |-- Hosts.WebApi/             ASP.NET Core host
+|   |   `-- Hosts.Worker/             Background worker host
+|   |-- Modules/                      Application modules
+|   |   |-- Example/                  Example module directory
+|   |   |   |-- Modules.Example/       Module implementation project
+|   |   |   |-- Modules.Example.Contracts/ Public contracts for the module
+|   |   |   `-- Modules.Example.Tests/ Module tests
+|   |   `-- Reporting/                Reporting module directory
+|   |-- ServiceDefaults/              Shared Aspire service configuration
+|   `-- Shared.Kernel/                Cross-cutting application helpers and infra plumbing
+|-- Aspire.Template.slnx               Root solution for editor discovery
 `-- .scripts/create_module.sh          Module scaffolding script
 ```
 
@@ -32,11 +35,11 @@ From the repository root, run:
 ./.scripts/create_module.sh Orders
 ```
 
-This creates a separate `Modules/Orders/` directory containing `Modules.Orders/`, `Modules.Orders.Contracts/`, and `Modules.Orders.Tests/`, adds them to the solution, and restores the repository.
+This creates a separate `src/Modules/Orders/` directory containing `Modules.Orders/`, `Modules.Orders.Contracts/`, and `Modules.Orders.Tests/`, adds them to the solution, and restores the repository.
 
 ### Project References
 
-- `AppHost` can reference deployable projects under `Hosts/`.
+- `AppHost` can reference deployable projects under `src/Hosts/`.
 - A host can reference `ServiceDefaults` and `Shared.Kernel`.
 - A module's implementation project can reference its `.Contracts` project and `Shared.Kernel`.
 - A module's tests can reference its implementation project and `.Contracts` project.
