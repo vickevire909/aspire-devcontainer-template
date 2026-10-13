@@ -2,8 +2,6 @@ using JasperFx;
 using Modules.Example;
 using Modules.Example.Contracts.Events;
 using Modules.Example.Features.GetWeatherForecast;
-using Modules.Reporting;
-using Modules.Reporting.Features.FileWeatherReport;
 using ServiceDefaults;
 using Wolverine;
 using Wolverine.AzureServiceBus;
@@ -17,7 +15,6 @@ builder.Services.AddProblemDetails();
 builder.Host.UseWolverine(opts =>
 {
     opts.Discovery.IncludeAssembly(typeof(GetWeatherForecastHandler).Assembly);
-    opts.Discovery.IncludeAssembly(typeof(FileWeatherReportHandler).Assembly);
 
     if (builder.Environment.IsDevelopment())
     {
@@ -41,7 +38,6 @@ builder.Host.UseWolverine(opts =>
 builder.Services.AddOpenApi();
 
 builder.AddExample();
-builder.AddReporting();
 
 WebApplication app = builder.Build();
 
@@ -55,7 +51,6 @@ if (app.Environment.IsDevelopment())
 
 // Map module endpoints
 app.MapExampleEndpoints();
-app.MapReportingEndpoints();
 
 app.MapDefaultEndpoints();
 

@@ -4,8 +4,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="../../Modules/Example/Modules.Example/Modules.Example.csproj" />
     <ProjectReference Include="../../Modules/Example/Modules.Example.Contracts/Modules.Example.Contracts.csproj" />
-    <ProjectReference Include="../../Modules/Reporting/Modules.Reporting/Modules.Reporting.csproj" />
     <ProjectReference Include="../../Shared.Kernel/Shared.Kernel.csproj" />
     <ProjectReference Include="../../Aspire/ServiceDefaults/ServiceDefaults.csproj" />
   </ItemGroup>

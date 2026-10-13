@@ -1,6 +1,6 @@
 using JasperFx;
-using Modules.Reporting;
-using Modules.Reporting.Features.FileWeatherReport;
+using Modules.Example;
+using Modules.Example.Domain;
 using ServiceDefaults;
 using Wolverine;
 using Wolverine.AzureServiceBus;
@@ -11,7 +11,7 @@ builder.AddServiceDefaults();
 
 builder.UseWolverine(opts =>
 {
-    opts.Discovery.IncludeAssembly(typeof(FileWeatherReportHandler).Assembly);
+    opts.Discovery.IncludeAssembly(typeof(WeatherForecast).Assembly);
 
     if (builder.Environment.IsDevelopment())
     {
@@ -32,7 +32,7 @@ builder.UseWolverine(opts =>
     opts.ListenToAzureServiceBusQueue("weather");
 });
 
-builder.AddReporting();
+builder.AddExample();
 
 using IHost host = builder.Build();
 

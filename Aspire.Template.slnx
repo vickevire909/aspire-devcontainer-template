@@ -9,11 +9,7 @@
     <Project Path="src/Hosts/Hosts.Worker/Hosts.Worker.csproj" />
   </Folder>
   <Folder Name="/Modules/" />
-  <Folder Name="/Modules/Reporting/">
-    <Project Path="src/Modules/Reporting/Modules.Reporting.Contracts/Modules.Reporting.Contracts.csproj" />
-    <Project Path="src/Modules/Reporting/Modules.Reporting.Tests/Modules.Reporting.Tests.csproj" />
-    <Project Path="src/Modules/Reporting/Modules.Reporting/Modules.Reporting.csproj" />
-  </Folder>
+  <Folder Name="/Modules/Reporting/" />
   <Folder Name="/Aspire/">
     <Project Path="src/Aspire/AppHost.Tests/AppHost.Tests.csproj" />
     <Project Path="src/Aspire/AppHost/AppHost.csproj" />
