@@ -14,8 +14,10 @@
     <Project Path="src/Modules/Reporting/Modules.Reporting.Tests/Modules.Reporting.Tests.csproj" />
     <Project Path="src/Modules/Reporting/Modules.Reporting/Modules.Reporting.csproj" />
   </Folder>
-  <Project Path="src/AppHost.Tests/AppHost.Tests.csproj" />
-  <Project Path="src/AppHost/AppHost.csproj" />
-  <Project Path="src/ServiceDefaults/ServiceDefaults.csproj" />
+  <Folder Name="/Aspire/">
+    <Project Path="src/Aspire/AppHost.Tests/AppHost.Tests.csproj" />
+    <Project Path="src/Aspire/AppHost/AppHost.csproj" />
+    <Project Path="src/Aspire/ServiceDefaults/ServiceDefaults.csproj" />
+  </Folder>
   <Project Path="src/Shared.Kernel/Shared.Kernel.csproj" />
 </Solution>

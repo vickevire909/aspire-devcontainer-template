@@ -7,7 +7,7 @@
     <ProjectReference Include="../../Modules/Example/Modules.Example.Contracts/Modules.Example.Contracts.csproj" />
     <ProjectReference Include="../../Modules/Reporting/Modules.Reporting/Modules.Reporting.csproj" />
     <ProjectReference Include="../../Shared.Kernel/Shared.Kernel.csproj" />
-    <ProjectReference Include="../../ServiceDefaults/ServiceDefaults.csproj" />
+    <ProjectReference Include="../../Aspire/ServiceDefaults/ServiceDefaults.csproj" />
   </ItemGroup>
 
   <ItemGroup>

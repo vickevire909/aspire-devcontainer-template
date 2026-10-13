@@ -10,8 +10,10 @@ This is a repository template to streamline the process of getting started with 
 ```
 .
 |-- src/                              Application and test projects
-|   |-- AppHost/                      Aspire orchestration and deployment model
-|   |-- AppHost.Tests/                AppHost integration tests
+|   |-- Aspire/
+|   |   |-- AppHost/                  Aspire orchestration and deployment model
+|   |   |-- AppHost.Tests/            AppHost integration tests
+|   |   `-- ServiceDefaults/          Shared Aspire service configuration
 |   |-- Hosts/                        Deployable applications
 |   |   |-- Hosts.WebApi/             ASP.NET Core host
 |   |   `-- Hosts.Worker/             Background worker host
@@ -21,7 +23,6 @@ This is a repository template to streamline the process of getting started with 
 |   |   |   |-- Modules.Example.Contracts/ Public contracts for the module
 |   |   |   `-- Modules.Example.Tests/ Module tests
 |   |   `-- Reporting/                Reporting module directory
-|   |-- ServiceDefaults/              Shared Aspire service configuration
 |   `-- Shared.Kernel/                Cross-cutting application helpers and infra plumbing
 |-- Aspire.Template.slnx               Root solution for editor discovery
 `-- .scripts/create_module.sh          Module scaffolding script
