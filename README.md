@@ -21,26 +21,45 @@ host directory.
 
 ## Folder Structure
 
-```
+Use this layout as the project grows. Entries marked `(example)` illustrate where
+additional apps, packages, and workspace files belong; create them only when needed.
+
+```text
 .
-|-- src/                              Application and test projects
-|   |-- Aspire/
-|   |   |-- AppHost/                  Aspire orchestration and deployment model
-|   |   |-- AppHost.Tests/            AppHost integration tests
-|   |   `-- ServiceDefaults/          Shared Aspire service configuration
-|   |-- Apps/                         Independently runnable applications
-|   |   |-- Api/                      ASP.NET Core API
-|   |   `-- Worker/                   Background worker
-|   |-- Modules/                      Application modules
-|   |   |-- Example/                  Example module directory
-|   |   |   |-- Modules.Example/       Module implementation project
-|   |   |   |-- Modules.Example.Contracts/ Public contracts for the module
-|   |   |   `-- Modules.Example.Tests/ Module tests
-|   |   `-- Reporting/                Reporting module directory
-|   `-- Shared.Kernel/                Cross-cutting application helpers and infra plumbing
-|-- Aspire.Template.slnx               Root solution for editor discovery
-`-- .scripts/create_module.sh          Module scaffolding script
+|-- src/
+|   |-- Apps/                             Independently runnable applications
+|   |   |-- Api/                          ASP.NET Core API
+|   |   |-- Worker/                       Background processing
+|   |   |-- Storefront/                   Fullstack web app (example)
+|   |   |-- Admin/                        Admin web app (example)
+|   |   `-- Mobile/                       Mobile app (example)
+|   |-- Modules/                          Backend business capabilities
+|   |   |-- Example/
+|   |   |   |-- Modules.Example/           Module implementation
+|   |   |   |-- Modules.Example.Contracts/ Public contracts
+|   |   |   `-- Modules.Example.Tests/     Module tests
+|   |   `-- Reporting/
+|   |-- Packages/                         Shared JS/TS code (example)
+|   |   |-- ui/                           Shared UI components (example)
+|   |   `-- api-client/                   Shared API client (example)
+|   |-- Shared.Kernel/                    Shared backend primitives
+|   `-- Aspire/
+|       |-- AppHost/                      Orchestration and deployment model
+|       |-- AppHost.Tests/                AppHost integration tests
+|       `-- ServiceDefaults/              Shared Aspire service configuration
+|-- docs/                                 Project documentation
+|-- .scripts/                             Repository tools and scaffolding
+|-- .devcontainer/                        Development environment
+|-- package.json                          Workspace commands (example)
+|-- pnpm-workspace.yaml                   JS/TS workspace membership (example)
+`-- Aspire.Template.slnx                  .NET solution
 ```
+
+Name apps by purpose and keep their source, assets, configuration, and tests
+together. A fullstack app keeps its frontend and server code in the same app;
+PWA support stays there unless it serves a separate product. Keep backend business
+logic in modules, and extract shared JS/TS packages only when multiple apps need them.
+Tests stay near their owner; add root `tests/` only for tests spanning applications.
 
 ## Service Bus emulator
 
