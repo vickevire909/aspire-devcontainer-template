@@ -1,0 +1,13 @@
+{
+  "name": "aspire-devcontainer-template",
+  "private": true,
+  "packageManager": "pnpm@12.16.1",
+  "scripts": {
+    "dev": "aspire run",
+    "format": "dotnet format style Aspire.Template.slnx --no-restore && dotnet format analyzers Aspire.Template.slnx --no-restore && dotnet csharpier format . && prettier --write .",
+    "lint": "dotnet format style Aspire.Template.slnx --no-restore --verify-no-changes && dotnet format analyzers Aspire.Template.slnx --no-restore --verify-no-changes && dotnet csharpier check . && prettier --check ."
+  },
+  "devDependencies": {
+    "prettier": "3.9.10"
+  }
+}

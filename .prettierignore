@@ -2,3 +2,6 @@
 **/[Mm]igrations/**
 **/[Dd]ist/**
 *.gen.cs
+
+# Bundled agent skills are maintained separately.
+.agents/skills/

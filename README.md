@@ -50,8 +50,8 @@ additional apps, packages, and workspace files belong; create them only when nee
 |-- docs/                                 Project documentation
 |-- .scripts/                             Repository tools and scaffolding
 |-- .devcontainer/                        Development environment
-|-- package.json                          Workspace commands (example)
-|-- pnpm-workspace.yaml                   JS/TS workspace membership (example)
+|-- package.json                          Workspace commands
+|-- pnpm-workspace.yaml                   JS/TS workspace membership
 `-- Aspire.Template.slnx                  .NET solution
 ```
 
@@ -114,9 +114,17 @@ the web app unless it is a separate product.
 Register apps that Aspire should manage in `src/Aspire/AppHost/`. Application folders and
 project files use matching names.
 
-When multiple JavaScript apps need shared code, add packages under `src/Packages/`
-(such as `ui` or `api-client`) and configure a root pnpm workspace. Add root package
-scripts when needed for shared development commands.
+The pnpm workspace includes JavaScript projects under `src/Apps/*` and
+`src/Packages/*`. Each needs its own `package.json`; .NET projects are unaffected.
+Add shared packages such as `ui` or `api-client` only when multiple apps need them.
+
+Run `pnpm install` at the repository root after dependency changes. Run `pnpm dev`
+to start Aspire and its registered apps. Each app owns its dev/build/test scripts;
+Aspire launches its development script and manages its lifecycle.
+
+Run `dotnet tool restore` once to install CSharpier. Use `pnpm format` to apply
+.NET style/analyzer fixes and format everything with CSharpier and Prettier.
+Use `pnpm lint` to check all of these rules without editing files.
 
 ### Project References
 
