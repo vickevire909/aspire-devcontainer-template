@@ -1,28 +1,72 @@
-FROM mcr.microsoft.com/devcontainers/dotnet:dev-10.0-noble
+# Pinned tool versions; changing one rebuilds its installation layer and later layers.
+ARG DOTNET_SDK_VERSION=10.0.403
+ARG NODE_VERSION=26.13.0
+ARG PNPM_VERSION=12.16.1
 
+# Use the official SDK as a source for .NET and ASP.NET Core.
+FROM mcr.microsoft.com/dotnet/sdk:${DOTNET_SDK_VERSION}-noble AS dotnet
+
+# Use the official Node distribution as a source for Node.js and npm.
+FROM node:${NODE_VERSION}-bookworm-slim AS node
+
+# Start with plain Ubuntu rather than a preconfigured development image.
+FROM ubuntu:24.04
+
+# Non-root account used by VS Code and development tools.
 ARG USERNAME=vscode
 
-ENV PATH="/home/${USERNAME}/.local/bin:${PATH}"
+# Configure .NET for containers; create user certificates at container startup.
+ENV DOTNET_ROOT=/usr/share/dotnet \
+    DOTNET_NOLOGO=true \
+    DOTNET_GENERATE_ASPNET_CERTIFICATE=false \
+    DOTNET_USE_POLLING_FILE_WATCHER=true \
+    DOTNET_RUNNING_IN_CONTAINER=true \
+    LANG=C.UTF-8
+# Make the SDK and user-installed tools available in every shell.
+ENV PATH="/usr/share/dotnet:/home/${USERNAME}/.dotnet/tools:/home/${USERNAME}/.local/bin:${PATH}"
 
-USER ${USERNAME}
+# Install shell/Git tools, runtime libraries, certificate tools and Codex sandbox tools.
+RUN apt-get update \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+       bash ca-certificates curl git openssh-client sudo xz-utils unzip \
+       libicu74 libssl3t64 libstdc++6 zlib1g libgcc-s1 libgssapi-krb5-2 libatomic1 \
+       tzdata libnss3-tools openssl procps bubblewrap ripgrep \
+    && rm -rf /var/lib/apt/lists/*
 
-# Install user-scoped templates once per image build, rather than container creation.
-RUN dotnet new install xunit.v3.templates
+# Ubuntu's default user occupies UID 1000; use it for vscode instead.
+RUN userdel -r ubuntu \
+    && groupadd --gid 1000 ${USERNAME} \
+    && useradd --uid 1000 --gid 1000 --create-home --shell /bin/bash ${USERNAME} \
+    && echo "${USERNAME} ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/${USERNAME} \
+    && chmod 0440 /etc/sudoers.d/${USERNAME}
 
-# Keep the installed package outside the runtime ~/.codex volume mount.
-# CODEX_HOME applies only to this installation; runtime config still uses ~/.codex.
+# Copy the SDK and both runtimes; DOTNET_ROOT is already on PATH.
+COPY --from=dotnet /usr/share/dotnet/ /usr/share/dotnet/
+
+# Copy Node.js and npm into Ubuntu, then install the pinned pnpm version.
+COPY --from=node /usr/local/ /usr/local/
+ARG PNPM_VERSION
+RUN npm install --global "pnpm@${PNPM_VERSION}"
+
+# Keep the Linux executable separate from the host's mounted Codex state.
 RUN curl -fsSL https://chatgpt.com/codex/install.sh -o /tmp/codex-install.sh \
     && CODEX_NON_INTERACTIVE=1 \
-       CODEX_HOME="/home/${USERNAME}/.local/share/codex-install" \
-       CODEX_INSTALL_DIR="/home/${USERNAME}/.local/bin" \
+       CODEX_HOME=/opt/codex \
+       CODEX_INSTALL_DIR=/usr/local/bin \
        sh /tmp/codex-install.sh \
     && codex --version \
     && rm /tmp/codex-install.sh
 
-USER root
-
-RUN SNIPPET="export PROMPT_COMMAND='history -a' && export HISTFILE=/commandhistory/.bash_history" \
-    && mkdir /commandhistory \
+# Save Bash history across rebuilds using the existing volume.
+RUN mkdir /commandhistory \
     && touch /commandhistory/.bash_history \
-    && chown -R $USERNAME /commandhistory \
-    && echo "$SNIPPET" >> "/home/$USERNAME/.bashrc"
+    && chown -R ${USERNAME}:${USERNAME} /commandhistory \
+    && echo "export HISTFILE=/commandhistory/.bash_history" >> /home/${USERNAME}/.bashrc \
+    && echo "export PROMPT_COMMAND='history -a'" >> /home/${USERNAME}/.bashrc
+
+# Run development commands as vscode, including certificate creation at startup.
+USER ${USERNAME}
+WORKDIR /home/${USERNAME}
+
+# Keep the xUnit template required by .scripts/create_module.sh.
+RUN dotnet new install xunit.v3.templates

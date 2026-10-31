@@ -5,6 +5,20 @@ This is a repository template to streamline the process of getting started with 
 - [Aspire and GitHub Codespaces](https://learn.microsoft.com/dotnet/aspire/get-started/github-codespaces)
 - [Aspire and Visual Studio Code Dev Containers](https://learn.microsoft.com/dotnet/aspire/get-started/dev-containers)
 
+## Devcontainer
+
+The image starts from Ubuntu 24.04. Pin .NET SDK, Node.js and pnpm versions
+at the top of `.devcontainer/Dockerfile.dev`, then rebuild the container.
+Development HTTPS certificates are created and trusted inside the container
+at startup; host browser trust is separate. Bash history stays in its volume.
+
+Codex uses the host's `~/.codex` directory through a writable bind mount at the
+same path, sharing configuration, file-based login, skills and plugins across
+containers. Changes also apply on the host. Host keyring credentials and
+host-only executables are not shared. Use this same mount and `CODEX_HOME`
+setting in other devcontainers. Docker must run on the machine holding that
+host directory.
+
 ## Folder Structure
 
 ```

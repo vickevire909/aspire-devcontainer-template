@@ -8,11 +8,13 @@
     }
   },
   "build": {
-    "dockerfile": "Dockerfile.dev"
+    "dockerfile": "Dockerfile.dev",
+    "context": ".."
   },
+  "remoteUser": "vscode",
   "mounts": [
     "source=projectname-bashhistory,target=/commandhistory,type=volume",
-    "source=aspire-codex,target=/home/vscode/.codex,type=volume"
+    "source=${localEnv:HOME}/.codex,target=${localEnv:HOME}/.codex,type=bind"
   ],
   "runArgs": [
     "--name",
@@ -21,17 +23,17 @@
     "seccomp=unconfined" // Enable Codex sandbox
   ],
   "remoteEnv": {
-    "SSL_CERT_DIR": "$HOME/.aspnet/dev-certs/trust:/usr/lib/ssl/certs",
+    "CODEX_HOME": "${localEnv:HOME}/.codex",
+    "SSL_CERT_DIR": "/home/vscode/.aspnet/dev-certs/trust:/usr/lib/ssl/certs",
     "GH_TOKEN": "${localEnv:GH_TOKEN}"
   },
   "postCreateCommand": {
     "Set bash history volume permissions": "sudo chown -R $(whoami): /commandhistory",
-    "Set Codex volume permissions": "sudo chown -R $(whoami): $HOME/.codex",
     "Restore .NET solution": "dotnet restore || true",
     "Restore .NET tools": "dotnet tool restore || true"
   },
   "postStartCommand": {
-    "Install .NET dev certs": "export SSL_CERT_DIR=\"$HOME/.aspnet/dev-certs/trust:/usr/lib/ssl/certs\" && dotnet dev-certs https --trust || true"
+    "Install .NET dev certs": "dotnet dev-certs https --trust"
   },
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:4.1.3": {
@@ -39,10 +41,7 @@
       "moby": true
     },
     "ghcr.io/devcontainers/features/github-cli:1": {},
-    "ghcr.io/microsoft/aspire-devcontainer-feature/aspire:3.1.0": {},
-    "ghcr.io/devcontainers/features/node:2.1.1": {
-      "version": "lts"
-    }
+    "ghcr.io/microsoft/aspire-devcontainer-feature/aspire:3.1.0": {}
   },
   "customizations": {
     "vscode": {
