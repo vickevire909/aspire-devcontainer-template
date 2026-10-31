@@ -4,9 +4,9 @@
     <Project Path="src/Modules/Example/Modules.Example.Tests/Modules.Example.Tests.csproj" />
     <Project Path="src/Modules/Example/Modules.Example/Modules.Example.csproj" />
   </Folder>
-  <Folder Name="/Hosts/">
-    <Project Path="src/Hosts/Hosts.WebApi/Hosts.WebApi.csproj" />
-    <Project Path="src/Hosts/Hosts.Worker/Hosts.Worker.csproj" />
+  <Folder Name="/Apps/">
+    <Project Path="src/Apps/Api/Api.csproj" />
+    <Project Path="src/Apps/Worker/Worker.csproj" />
   </Folder>
   <Folder Name="/Modules/" />
   <Folder Name="/Modules/Reporting/" />

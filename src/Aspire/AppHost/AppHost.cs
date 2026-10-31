@@ -28,7 +28,7 @@ var sb = builder
     .AddServiceBusQueue("weather");
 
 var api = builder
-    .AddProject<Projects.Hosts_WebApi>("web-api")
+    .AddProject<Projects.Api>("web-api")
     .WithHttpHealthCheck("/health")
     .WithReference(sb)
     .WaitFor(sb)
@@ -43,7 +43,7 @@ if (builder.ExecutionContext.IsRunMode)
 }
 
 builder
-    .AddProject<Projects.Hosts_Worker>("worker")
+    .AddProject<Projects.Worker>("worker")
     .WithReference(sb)
     .WaitFor(sb)
     .WaitFor(api)

@@ -9,8 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../../Hosts/Hosts.WebApi/Hosts.WebApi.csproj" />
-    <ProjectReference Include="../../Hosts/Hosts.Worker/Hosts.Worker.csproj" />
+    <ProjectReference Include="../../Apps/Api/Api.csproj" />
+    <ProjectReference Include="../../Apps/Worker/Worker.csproj" />
   </ItemGroup>
 
   <ItemGroup>

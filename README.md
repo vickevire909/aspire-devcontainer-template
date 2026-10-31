@@ -28,9 +28,9 @@ host directory.
 |   |   |-- AppHost/                  Aspire orchestration and deployment model
 |   |   |-- AppHost.Tests/            AppHost integration tests
 |   |   `-- ServiceDefaults/          Shared Aspire service configuration
-|   |-- Hosts/                        Deployable applications
-|   |   |-- Hosts.WebApi/             ASP.NET Core host
-|   |   `-- Hosts.Worker/             Background worker host
+|   |-- Apps/                         Independently runnable applications
+|   |   |-- Api/                      ASP.NET Core API
+|   |   `-- Worker/                   Background worker
 |   |-- Modules/                      Application modules
 |   |   |-- Example/                  Example module directory
 |   |   |   |-- Modules.Example/       Module implementation project
@@ -85,9 +85,23 @@ From the repository root, run:
 
 This creates a separate `src/Modules/Orders/` directory containing `Modules.Orders/`, `Modules.Orders.Contracts/`, and `Modules.Orders.Tests/`, adds them to the solution, and restores the repository.
 
+### Adding applications
+
+Add independently runnable apps under `src/Apps/`, named by purpose, such as
+`Storefront`, `Admin`, or `Mobile`. Keep each app's source, assets, configuration,
+and tests together using its framework's conventions. PWA support belongs inside
+the web app unless it is a separate product.
+
+Register apps that Aspire should manage in `src/Aspire/AppHost/`. Application folders and
+project files use matching names.
+
+When multiple JavaScript apps need shared code, add packages under `src/Packages/`
+(such as `ui` or `api-client`) and configure a root pnpm workspace. Add root package
+scripts when needed for shared development commands.
+
 ### Project References
 
-- `AppHost` can reference deployable projects under `src/Hosts/`.
+- `AppHost` can reference deployable projects under `src/Apps/`.
 - A host can reference `ServiceDefaults` and `Shared.Kernel`.
 - A module's implementation project can reference its `.Contracts` project and `Shared.Kernel`.
 - A module's tests can reference its implementation project and `.Contracts` project.
