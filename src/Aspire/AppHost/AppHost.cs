@@ -52,4 +52,13 @@ builder
         opts.IncludeMutatingCommands = true; // adds: Apply resources, Write generated code
     });
 
+#pragma warning disable ASPIREJAVASCRIPT001 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
+builder
+    .AddViteApp("storefront", "../../Apps/storefront", runScriptName: "dev")
+    .WithReference(api)
+    .WaitFor(api)
+    .PublishAsNodeServer(".output/server/index.mjs", outputPath: ".output")
+    .WithEnvironment("SERVER_URL", api.GetEndpoint("http"));
+#pragma warning restore ASPIREJAVASCRIPT001 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
+
 builder.Build().Run();

@@ -4,10 +4,16 @@
   "packageManager": "pnpm@12.16.1",
   "scripts": {
     "dev": "aspire run",
-    "format": "dotnet format style Aspire.Template.slnx --no-restore && dotnet format analyzers Aspire.Template.slnx --no-restore && dotnet csharpier format . && prettier --write .",
-    "lint": "dotnet format style Aspire.Template.slnx --no-restore --verify-no-changes && dotnet format analyzers Aspire.Template.slnx --no-restore --verify-no-changes && dotnet csharpier check . && prettier --check ."
+    "format": "dotnet format style Aspire.Template.slnx --no-restore && dotnet format analyzers Aspire.Template.slnx --no-restore && dotnet csharpier format . && pnpm format:js",
+    "lint": "dotnet format style Aspire.Template.slnx --no-restore --verify-no-changes && dotnet format analyzers Aspire.Template.slnx --no-restore --verify-no-changes && dotnet csharpier check . && pnpm lint:js",
+    "format:js": "pnpm -r --if-present lint:fix && prettier --write .",
+    "lint:js": "pnpm -r --if-present lint && prettier --check ."
   },
   "devDependencies": {
-    "prettier": "3.9.10"
+    "@tanstack/eslint-config": "0.4.0",
+    "eslint": "^9.39.5",
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "3.9.10",
+    "prettier-plugin-tailwindcss": "^0.8.1"
   }
 }

@@ -5,3 +5,8 @@
 
 # Bundled agent skills are maintained separately.
 .agents/skills/
+
+**/.output/**
+**/.nitro/**
+**/.tanstack/**
+**/routeTree.gen.ts

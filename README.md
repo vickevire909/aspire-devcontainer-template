@@ -126,6 +126,10 @@ Run `dotnet tool restore` once to install CSharpier. Use `pnpm format` to apply
 .NET style/analyzer fixes and format everything with CSharpier and Prettier.
 Use `pnpm lint` to check all of these rules without editing files.
 
+Use `pnpm format:js` or `pnpm lint:js` for ESLint and Prettier only. Shared tooling
+and Prettier configuration live at the root; apps keep their ESLint rules.
+Prettier sorts Storefront's Tailwind classes using its CSS entry point.
+
 ### Project References
 
 - `AppHost` can reference deployable projects under `src/Apps/`.
